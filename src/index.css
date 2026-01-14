@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Kyro Brand Colors - Forest Green meets Modern Fitness */
+    --background: 40 33% 98%;
+    --foreground: 160 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 160 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 30% 12%;
+
+    /* Primary - Deep Forest Green */
+    --primary: 160 35% 18%;
+    --primary-foreground: 40 33% 98%;
+
+    /* Secondary - Warm Cream */
+    --secondary: 40 30% 94%;
+    --secondary-foreground: 160 30% 12%;
+
+    /* Muted */
+    --muted: 40 20% 92%;
+    --muted-foreground: 160 15% 45%;
+
+    /* Accent - Energetic Teal */
+    --accent: 168 60% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 160 35% 18%;
+
+    --radius: 0.75rem;
+
+    /* Custom Kyro tokens */
+    --kyro-green: 160 35% 18%;
+    --kyro-green-light: 160 30% 25%;
+    --kyro-cream: 40 33% 98%;
+    --kyro-warm: 35 40% 95%;
+    --kyro-teal: 168 60% 40%;
+    --kyro-gold: 42 90% 55%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(40, 33%, 98%) 0%, hsl(35, 40%, 95%) 50%, hsl(40, 30%, 92%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(40, 30%, 98%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(160, 35%, 18%) 0%, hsl(160, 30%, 25%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(160 30% 12% / 0.08);
+    --shadow-card: 0 8px 32px -8px hsl(160 30% 12% / 0.1);
+    --shadow-elevated: 0 16px 48px -12px hsl(160 30% 12% / 0.15);
+    --shadow-glow: 0 0 40px hsl(168 60% 40% / 0.15);
+
+    /* Sidebar defaults */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 160 30% 8%;
+    --foreground: 40 33% 98%;
+
+    --card: 160 25% 12%;
+    --card-foreground: 40 33% 98%;
+
+    --popover: 160 25% 12%;
+    --popover-foreground: 40 33% 98%;
+
+    --primary: 40 33% 98%;
+    --primary-foreground: 160 30% 12%;
+
+    --secondary: 160 20% 18%;
+    --secondary-foreground: 40 33% 98%;
+
+    --muted: 160 20% 18%;
+    --muted-foreground: 40 20% 65%;
+
+    --accent: 168 60% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 160 20% 20%;
+    --input: 160 20% 20%;
+    --ring: 40 33% 98%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+@layer components {
+  .kyro-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .kyro-section {
+    @apply py-20 md:py-28;
+  }
+
+  .kyro-gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .kyro-card {
+    @apply rounded-2xl bg-card border border-border/50 shadow-[var(--shadow-card)] transition-all duration-300 hover:shadow-[var(--shadow-elevated)];
+  }
+
+  .kyro-glow {
+    @apply relative;
+  }
+
+  .kyro-glow::after {
+    content: '';
+    @apply absolute inset-0 -z-10 rounded-2xl opacity-0 transition-opacity duration-300;
+    background: var(--shadow-glow);
+    filter: blur(20px);
+  }
+
+  .kyro-glow:hover::after {
+    @apply opacity-100;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out 2s infinite;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pulseSoft {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+}
