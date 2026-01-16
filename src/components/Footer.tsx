@@ -1,4 +1,4 @@
-import { Instagram, Twitter, Linkedin } from "lucide-react";
+import { Instagram, X, Linkedin } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,21 +23,27 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://www.instagram.com/kyroapp/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-card p-2.5 text-muted-foreground shadow-soft transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-elevated"
               aria-label="Instagram"
             >
               <Instagram className="h-5 w-5" />
             </a>
             <a
-              href="#"
+              href="https://x.com/kyroappofficial"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-card p-2.5 text-muted-foreground shadow-soft transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-elevated"
-              aria-label="Twitter"
+              aria-label="X"
             >
-              <Twitter className="h-5 w-5" />
+              <X className="h-5 w-5" />
             </a>
             <a
               href="#"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-card p-2.5 text-muted-foreground shadow-soft transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-elevated"
               aria-label="LinkedIn"
             >
