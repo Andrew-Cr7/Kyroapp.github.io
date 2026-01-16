@@ -51,7 +51,7 @@ const Features = () => {
             Fitness without borders
           </h2>
           <p className="text-lg text-muted-foreground">
-            We're breaking down the barriers that keep travelers from staying fit. 
+            We're breaking down the barriers that keep travellers from staying fit. 
             No more searching for gyms, negotiating prices, or signing long contracts.
           </p>
         </div>
