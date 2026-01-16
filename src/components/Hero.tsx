@@ -40,7 +40,7 @@ const Hero = () => {
             {/* Subheadline */}
             <p className="mb-10 animate-fade-up text-xl leading-relaxed text-muted-foreground md:text-2xl" style={{ animationDelay: "200ms" }}>
               Access gyms worldwide with flexible day, week, or month passes. 
-              Perfect for travelers and digital nomads who never skip leg day.
+              Perfect for travellers and digital nomads who never skip leg day.
             </p>
 
             {/* Waitlist Form */}
