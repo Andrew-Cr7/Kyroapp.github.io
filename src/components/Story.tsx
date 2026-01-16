@@ -25,9 +25,8 @@ const Story = () => {
                 we've been passionate about fitness since our teens, we knew there had to be a better way.
               </p>
               <p>
-                And we aren't building it alone. We teamed up with our old school friend, now our CTO, who’s 
-                based in Japan. He’s helping bring Kyro to life, building the tech that makes it possible 
-                to find and book gyms wherever you are.
+                And we aren't building it alone. We have teamed up with our old school friend, now our CTO, who’s 
+                based in Japan. He’s helping bring the idea to life, building the tech that makes it all possible.
               </p>
               <p className="font-semibold text-primary-foreground">
                 So we created Kyro.
