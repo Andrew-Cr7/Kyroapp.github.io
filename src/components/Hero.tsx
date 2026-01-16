@@ -61,8 +61,7 @@ const Hero = () => {
               ))}  
               </div>
               <div className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">500+</span> fitness enthusiasts 
-                already on the waitlist
+                <span className="font-semibold text-foreground">Trusted</span> by travellers who refuse to skip training 
               </div>
             </div>
           </div>
