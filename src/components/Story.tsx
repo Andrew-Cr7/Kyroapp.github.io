@@ -15,17 +15,17 @@ const Story = () => {
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-primary-foreground/80">
               <p>
-                We're two brothers who love fitness and travel. Having visited 50+ countries 
-                between us, we've spent years juggling our workouts with life on the road—searching 
+                We're two brothers who love fitness and travel. Having visited 60+ countries 
+                between us, we've spent years juggling our workouts with life on the road, searching 
                 for gyms in new places, dealing with confusing prices, and skipping workouts when 
                 we couldn't find a place to train.
               </p>
               <p>
-                Having both played sport at a high level—including semi-professional rugby—and 
-                being passionate about fitness since our teens, we knew there had to be a better way.
+                Having both played sport at a high level, including semi-professional rugby,  
+                we've been passionate about fitness since our teens, we knew there had to be a better way.
               </p>
               <p>
-                And we aren't building it alone. We teamed up with our old school friend—now our CTO—who’s 
+                And we aren't building it alone. We teamed up with our old school friend, now our CTO, who’s 
                 based in Japan. He’s helping bring Kyro to life, building the tech that makes it possible 
                 to find and book gyms wherever you are.
               </p>
