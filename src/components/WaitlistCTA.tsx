@@ -17,12 +17,12 @@ const WaitlistCTA = () => {
             </div>
             
             <h2 className="mb-6 font-display text-4xl font-bold text-foreground md:text-5xl">
-              Ready to train anywhere?
+              Be a part of Kyro from day one
             </h2>
             
             <p className="mb-10 text-lg text-muted-foreground">
               Join our waitlist to be the first to know when Kyro launches. 
-              Early members get exclusive perks and founding member benefits.
+              Early access, founding perks and a global training community.
             </p>
             
             <WaitlistForm variant="section" />
