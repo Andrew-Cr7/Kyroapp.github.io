@@ -15,24 +15,39 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !email.includes("@")) {
       toast.error("Please enter a valid email address");
       return;
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast.success("You're on the list! We'll be in touch soon.");
-    setEmail("");
-    
-    // Reset after 3 seconds
-    setTimeout(() => setIsSubmitted(false), 3000);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mjkogrvw", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      setIsSubmitted(true);
+      toast.success("You're on the list! We'll be in touch soon.");
+      setEmail("");
+
+      // Reset after 3 seconds
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (variant === "hero") {
