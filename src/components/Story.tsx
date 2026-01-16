@@ -24,6 +24,11 @@ const Story = () => {
                 Having both played sport at a high level—including semi-professional rugby—and 
                 being passionate about fitness since our teens, we knew there had to be a better way.
               </p>
+              <p>
+                And we aren't building it alone. We teamed up with our old school friend—now our CTO—who’s 
+                based in Japan. He’s helping bring Kyro to life, building the tech that makes it possible 
+                to find and book gyms wherever you are.
+              </p>
               <p className="font-semibold text-primary-foreground">
                 So we created Kyro.
               </p>
