@@ -11,7 +11,7 @@ const Story = () => {
               Our Story
             </span>
             <h2 className="mb-6 font-display text-4xl font-bold md:text-5xl">
-              Built by travelers, for travelers
+              Built by travellers, for travellers
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-primary-foreground/80">
               <p>
