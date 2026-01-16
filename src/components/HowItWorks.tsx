@@ -12,13 +12,13 @@ const HowItWorks = () => {
       icon: <Building2 className="h-8 w-8" />,
       step: "02",
       title: "Pick Your Gym",
-      description: "Browse photos, amenities, and reviews. Choose the perfect gym for your workout style.",
+      description: "Browse photos, amenities, and reviews. Choose the perfect gym for your workout.",
     },
     {
       icon: <Dumbbell className="h-8 w-8" />,
       step: "03",
       title: "Start Training",
-      description: "Book your pass, show your QR code at the door, and get your workout in. Simple as that.",
+      description: "Book your pass, show your QR code at the door, and get your workout in. Simple.",
     },
   ];
 
