@@ -39,7 +39,7 @@ const Story = () => {
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="rounded-2xl bg-primary-foreground/5 p-6 backdrop-blur-sm">
               <Globe2 className="mb-4 h-10 w-10 text-accent" />
-              <h3 className="mb-2 font-display text-3xl font-bold">50+</h3>
+              <h3 className="mb-2 font-display text-3xl font-bold">60+</h3>
               <p className="text-primary-foreground/70">Countries visited by our founding team</p>
             </div>
             <div className="rounded-2xl bg-primary-foreground/5 p-6 backdrop-blur-sm">
