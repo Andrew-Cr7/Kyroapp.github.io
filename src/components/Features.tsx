@@ -36,7 +36,7 @@ const Features = () => {
     {
       icon: <Globe className="h-7 w-7" />,
       title: "Book Anywhere",
-      description: "Browse, book, and access gyms instantly from your phone. No phone calls or paperwork needed.",
+      description: "Browse, book and access gyms instantly from your phone. No phone calls or paperwork needed.",
     },
   ];
 
