@@ -24,20 +24,21 @@ const Header = () => {
       <div className="kyro-container">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2" aria-label="Kyro - Home">
             <span className="font-display text-2xl font-bold text-primary">
               Kyro
             </span>
-            <span className="text-accent text-2xl font-bold">&lt;</span>
+            <span className="text-accent text-2xl font-bold" aria-hidden="true">&lt;</span>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
             {navLinks.map((link) => (
               <button
                 key={link.label}
                 onClick={() => scrollToSection(link.href)}
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                aria-label+{'Navigate to ${link.label} section'}
               >
                 {link.label}
               </button>

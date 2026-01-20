@@ -8,8 +8,10 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
-          alt="Modern gym interior"
+          alt="Modern gym interior with professional equipment - Kyro flexible gym passes for travellers and digital nomads"
           className="h-full w-full object-cover"
+          loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
