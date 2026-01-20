@@ -11,18 +11,22 @@ const Story = () => {
               Our Story
             </span>
             <h2 className="mb-6 font-display text-4xl font-bold md:text-5xl">
-              Built by travelers, for travelers
+              Built by travellers, for travellers
             </h2>
             <div className="space-y-6 text-lg leading-relaxed text-primary-foreground/80">
               <p>
-                We're two brothers who love fitness and travel. Having visited 50+ countries 
-                between us, we've spent years juggling our workouts with life on the road—searching 
+                We're two brothers who love fitness and travel. Having visited 60+ countries 
+                between us, we've spent years juggling our workouts with life on the road, searching 
                 for gyms in new places, dealing with confusing prices, and skipping workouts when 
                 we couldn't find a place to train.
               </p>
               <p>
-                Having both played sport at a high level—including semi-professional rugby—and 
-                being passionate about fitness since our teens, we knew there had to be a better way.
+                Having both played sport at a high level, including semi-professional rugby,  
+                we've been passionate about fitness since our teens, we knew there had to be a better way.
+              </p>
+              <p>
+                And we aren't building it alone. We have teamed up with our old school friend, now our CTO, who’s 
+                based in Japan. He’s helping bring the idea to life, building the tech that makes it all possible.
               </p>
               <p className="font-semibold text-primary-foreground">
                 So we created Kyro.
@@ -34,7 +38,7 @@ const Story = () => {
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="rounded-2xl bg-primary-foreground/5 p-6 backdrop-blur-sm">
               <Globe2 className="mb-4 h-10 w-10 text-accent" />
-              <h3 className="mb-2 font-display text-3xl font-bold">50+</h3>
+              <h3 className="mb-2 font-display text-3xl font-bold">60+</h3>
               <p className="text-primary-foreground/70">Countries visited by our founding team</p>
             </div>
             <div className="rounded-2xl bg-primary-foreground/5 p-6 backdrop-blur-sm">

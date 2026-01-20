@@ -36,7 +36,7 @@ const Features = () => {
     {
       icon: <Globe className="h-7 w-7" />,
       title: "Book Anywhere",
-      description: "Browse, book, and access gyms instantly from your phone. No phone calls or paperwork needed.",
+      description: "Browse, book and access gyms instantly from your phone. No phone calls or paperwork needed.",
     },
   ];
 
@@ -51,7 +51,7 @@ const Features = () => {
             Fitness without borders
           </h2>
           <p className="text-lg text-muted-foreground">
-            We're breaking down the barriers that keep travelers from staying fit. 
+            We're breaking down the barriers that keep travellers from staying fit. 
             No more searching for gyms, negotiating prices, or signing long contracts.
           </p>
         </div>

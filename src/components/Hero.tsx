@@ -40,7 +40,7 @@ const Hero = () => {
             {/* Subheadline */}
             <p className="mb-10 animate-fade-up text-xl leading-relaxed text-muted-foreground md:text-2xl" style={{ animationDelay: "200ms" }}>
               Access gyms worldwide with flexible day, week, or month passes. 
-              Perfect for travelers and digital nomads who never skip leg day.
+              Perfect for travellers and digital nomads who never skip leg day.
             </p>
 
             {/* Waitlist Form */}
@@ -51,18 +51,17 @@ const Hero = () => {
             {/* Social Proof */}
             <div className="mt-12 flex animate-fade-up items-center gap-6" style={{ animationDelay: "400ms" }}>
               <div className="flex -space-x-3">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <div
-                    key={i}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-primary/10 text-xs font-semibold text-primary"
-                  >
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
+              {["K", "Y", "R", "O", "+"].map((letter, i) => (
+               <div
+               key={i}
+               className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-primary/10 text-xs font-semibold text-primary"
+              >
+              {letter}
+              </div>
+              ))}  
               </div>
               <div className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">500+</span> fitness enthusiasts 
-                already on the waitlist
+                <span className="font-semibold text-foreground">Built for people who train wherever life takes them</span>
               </div>
             </div>
           </div>
