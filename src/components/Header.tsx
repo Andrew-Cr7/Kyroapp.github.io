@@ -9,6 +9,7 @@ const Header = () => {
     { label: "Features", href: "#features" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Story", href: "#story" },
+    { label: "FAQ", href: "#faq" },
   ];
 
   const scrollToSection = (href: string) => {
