@@ -38,7 +38,7 @@ const Header = () => {
                 key={link.label}
                 onClick={() => scrollToSection(link.href)}
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                aria-label+{'Navigate to ${link.label} section'}
+                aria-label={'Navigate to ${link.label} section'}
               >
                 {link.label}
               </button>
