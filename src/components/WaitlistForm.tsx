@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface WaitlistFormProps {
   variant?: "hero" | "section";
@@ -24,31 +25,49 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://formspree.io/f/mjkogrvw", {
+      // 1️⃣ Save to Supabase waitlist table
+      const { error: insertError } = await supabase
+        .from("waitlist")
+        .insert([{ email }]);
+
+      if (insertError) {
+        console.error("Supabase insert error:", insertError);
+        toast.error("Failed to add to waitlist. Try again later.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // 2️⃣ Call Supabase Edge Function to send email via Resend
+      const res = await fetch("/functions/v1/send-waitlist-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
         },
         body: JSON.stringify({ email }),
       });
 
-      if (!response.ok) {
-        throw new Error("Submission failed");
+      if (!res.ok) {
+        console.error("Error calling Edge Function:", await res.text());
+        toast.error("Failed to send confirmation email.");
+      } else {
+        toast.success("You're on the list! Check your email.");
       }
 
+      // Success UI
       setIsSubmitted(true);
-      toast.success("You're on the list! We'll be in touch soon.");
       setEmail("");
 
-      // Reset after 3 seconds
+      // Reset form after 3 seconds
       setTimeout(() => setIsSubmitted(false), 3000);
-    } catch (error) {
-      toast.error("Something went wrong. Please try again.");
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Try again later.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  const inputClass = "h-14 flex-1 text-base bg-card/90 backdrop-blur-sm";
 
   if (variant === "hero") {
     return (
