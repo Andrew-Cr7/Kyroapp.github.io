@@ -41,7 +41,7 @@ const Footer = () => {
               <X className="h-5 w-5" />
             </a>
             <a
-              href="#"
+              href="https://linkedin.com/company/kyroapp"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full bg-card p-2.5 text-muted-foreground shadow-soft transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-elevated"
