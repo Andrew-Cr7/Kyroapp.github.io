@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client"; // Make sure this path is correct
+import { supabase } from "@/integrations/supabase/client";
 
 interface WaitlistFormProps {
   variant?: "hero" | "section";
@@ -36,23 +36,25 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
         return;
       }
 
-      // 2️⃣ Call Supabase Edge Function to send confirmation email via Resend
-      const response = await fetch(
-  "https://cnufqucnqdbscnskwgno.supabase.co/functions/v1/send-waitlist-email",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-    },
-    body: JSON.stringify({ email }),
-  }
-);
+      // 2️⃣ Call Edge Function to send confirmation email
+      const payload = { email }; // name can be added later if you collect it
+      console.log("Sending payload to edge function:", payload);
 
-      if (!response.ok) {
-        const text = await response.text();
+      const res = await fetch("/functions/v1/send-waitlist-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
         console.error("Edge Function error:", text);
-        toast.error("Failed to send confirmation email.");
+        toast.success(
+          "You're on the waitlist! Email could not be sent, but we'll notify you soon."
+        );
       } else {
         toast.success("You're on the waitlist! Check your email.");
       }
@@ -61,7 +63,7 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
       setIsSubmitted(true);
       setEmail("");
 
-      // Reset form state after 3 seconds
+      // Reset after 3 seconds
       setTimeout(() => setIsSubmitted(false), 3000);
     } catch (err) {
       console.error(err);
@@ -74,7 +76,10 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
   const inputClass = "h-14 flex-1 text-base bg-card/90 backdrop-blur-sm";
 
   return (
-    <form onSubmit={handleSubmit} className={variant === "hero" ? "w-full max-w-md" : "mx-auto w-full max-w-lg"}>
+    <form
+      onSubmit={handleSubmit}
+      className={variant === "hero" ? "w-full max-w-md" : "mx-auto w-full max-w-lg"}
+    >
       <div className="flex flex-col gap-3 sm:flex-row">
         <Input
           type="email"
