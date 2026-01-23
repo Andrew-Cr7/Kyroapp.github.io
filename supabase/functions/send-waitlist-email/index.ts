@@ -12,8 +12,8 @@ const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 Deno.serve(async (req) => {
   // ✅ Handle CORS preflight
   if (req.method === "OPTIONS") {
-    return new Response(null, {
-      status: 204,
+    return new Response("ok", {
+      status: 200,
       headers: corsHeaders,
     });
   }
