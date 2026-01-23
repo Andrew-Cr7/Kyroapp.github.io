@@ -1,13 +1,12 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
-
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -15,37 +14,10 @@ Deno.serve(async (req) => {
   }
 
   try {
-    if (!RESEND_API_KEY) {
-      throw new Error("RESEND_API_KEY not set");
-    }
+    if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY not set");
 
-    // ✅ Supabase-safe body parsing
-    let email: string | undefined;
-
-    try {
-      const body = await req.json();
-      email = body?.email;
-    } catch {
-      // Supabase sometimes sends body differently
-      const text = await req.text();
-      if (text) {
-        const parsed = JSON.parse(text);
-        email = parsed?.email;
-      }
-    }
-
-    if (!email) {
-      console.error("No email received");
-      return new Response(
-        JSON.stringify({ error: "Email is required" }),
-        {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
-    }
-
-    console.log("Sending waitlist email to:", email);
+    const { email } = await req.json().catch(() => ({}));
+    if (!email) throw new Error("Email is required");
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -54,44 +26,33 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Kyro <onboarding@resend.dev>", // ✅ guaranteed verified
+        from: "Kyro <info@kyroapp.co>", // Verified sender
         to: email,
         subject: "Welcome to the Kyro Waitlist",
         html: `
           <p>Thanks for joining the Kyro waitlist!</p>
-          <p>We’ll let you know as soon as we launch.</p>
+          <p>We’ll notify you as soon as we launch.</p>
           <p>— Team Kyro</p>
         `,
       }),
     });
 
     if (!res.ok) {
-      const errorText = await res.text();
-      console.error("Resend error:", errorText);
-      return new Response(
-        JSON.stringify({ error: "Failed to send email" }),
-        {
-          status: 500,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+      const text = await res.text();
+      console.error("Resend API error:", text);
+      throw new Error("Failed to send email");
     }
 
     return new Response(
       JSON.stringify({ success: true }),
-      {
-        status: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
+
   } catch (err) {
-    console.error("Edge function crash:", err);
+    console.error("Edge function error:", err);
     return new Response(
-      JSON.stringify({ error: "Internal server error" }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      JSON.stringify({ error: err.message }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });
