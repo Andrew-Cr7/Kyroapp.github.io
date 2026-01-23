@@ -23,20 +23,20 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
 
     setIsSubmitting(true);
 
-    try {
-      // 1️⃣ Insert into Supabase table
-      const { error } = await supabase
-  .from("waitlist")
-  .upsert(
-    { email },
-    { onConflict: "email", ignoreDuplicates: true }
-  );
-      if (error) {
-        console.error("Supabase insert error:", error);
-        toast.error("Failed to join waitlist. Try again later.");
-        setIsSubmitting(false);
-        return;
-      }
+   try {
+    // 1️⃣ Insert or ignore duplicate
+    const { error: dbError } = await supabase
+      .from("waitlist")
+      .upsert(
+        { email },
+        { onConflict: "email", ignoreDuplicates: true }
+      );
+
+    if (dbError) {
+      console.error("Supabase error:", dbError);
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
 
     // 2️⃣ Call Edge Function (CORS-safe)
 const { error: functionError } = await supabase.functions.invoke(
