@@ -1,10 +1,9 @@
-// src/components/WaitlistForm.tsx
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client"; // Make sure this path is correct
+import { supabase } from "@/integrations/supabase/client";
 
 interface WaitlistFormProps {
   variant?: "hero" | "section";
@@ -17,7 +16,6 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!email || !email.includes("@")) {
       toast.error("Please enter a valid email address");
       return;
@@ -25,43 +23,41 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
 
     setIsSubmitting(true);
 
-    try {
-      // 1️⃣ Add to Supabase waitlist table
-      const { error: insertError } = await supabase.from("waitlist").insert([{ email }]);
+   try {
+    // 1️⃣ Insert or ignore duplicate
+    const { error: dbError } = await supabase
+      .from("waitlist")
+      .upsert(
+        { email },
+        { onConflict: "email", ignoreDuplicates: true }
+      );
 
-      if (insertError) {
-        console.error("Supabase insert error:", insertError);
-        toast.error("Failed to add to waitlist. Try again later.");
-        setIsSubmitting(false);
-        return;
-      }
+    if (dbError) {
+      console.error("Supabase error:", dbError);
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
 
-      // 2️⃣ Call Supabase Edge Function to send confirmation email via Resend
-      const response = await fetch(
-  "https://cnufqucnqdbscnskwgno.supabase.co/functions/v1/send-waitlist-email",
+    // 2️⃣ Call Edge Function (CORS-safe)
+const { error: functionError } = await supabase.functions.invoke(
+  "send-waitlist-email",
   {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-    },
-    body: JSON.stringify({ email }),
+    body: { email },
   }
 );
 
-      if (!response.ok) {
-        const text = await response.text();
-        console.error("Edge Function error:", text);
-        toast.error("Failed to send confirmation email.");
-      } else {
-        toast.success("You're on the waitlist! Check your email.");
-      }
+if (functionError) {
+  console.error("Edge Function error:", functionError);
+  toast.success(
+    "You're on the waitlist! Email could not be sent, but we'll notify you soon."
+  );
+} else {
+  toast.success("You're on the waitlist! Check your email.");
+}
 
-      // Success UI
-      setIsSubmitted(true);
+      // Reset UI
       setEmail("");
-
-      // Reset form state after 3 seconds
+      setIsSubmitted(true);
       setTimeout(() => setIsSubmitted(false), 3000);
     } catch (err) {
       console.error(err);
@@ -74,7 +70,10 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
   const inputClass = "h-14 flex-1 text-base bg-card/90 backdrop-blur-sm";
 
   return (
-    <form onSubmit={handleSubmit} className={variant === "hero" ? "w-full max-w-md" : "mx-auto w-full max-w-lg"}>
+    <form
+      onSubmit={handleSubmit}
+      className={variant === "hero" ? "w-full max-w-md" : "mx-auto w-full max-w-lg"}
+    >
       <div className="flex flex-col gap-3 sm:flex-row">
         <Input
           type="email"
