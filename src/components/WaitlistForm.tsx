@@ -40,7 +40,7 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
       const payload = { email }; // name can be added later if you collect it
       console.log("Sending payload to edge function:", payload);
 
-      const res = await fetch("/functions/v1/send-waitlist-email", {
+      const res = await fetch("https://cnufqucnqdbscnskwgno.functions.supabase.co/send-waitlist-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
