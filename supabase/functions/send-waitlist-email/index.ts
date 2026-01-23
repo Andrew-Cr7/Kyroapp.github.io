@@ -1,24 +1,21 @@
-// src/functions/send-waitlist-email/index.ts
-
 // Setup type definitions for Supabase Edge Functions
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
+// Read Resend API key from environment
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 if (!RESEND_API_KEY) {
   throw new Error("RESEND_API_KEY environment variable not set");
 }
 
-// Replace this with your frontend domain
-const FRONTEND_URL = "https://kyroapp.co";
-
 console.log("Edge function initialized");
 
 Deno.serve(async (req) => {
-  // --- 1️⃣ Handle CORS preflight requests ---
+  // Handle preflight CORS requests
   if (req.method === "OPTIONS") {
     return new Response(null, {
+      status: 204,
       headers: {
-        "Access-Control-Allow-Origin": FRONTEND_URL,
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
       },
@@ -26,36 +23,30 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // --- 2️⃣ Parse the request body ---
-    const { email, name } = await req.json();
+    const { email } = await req.json();
 
     if (!email) {
-      return new Response(
-        JSON.stringify({ error: "Email is required" }),
-        {
-          status: 400,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": FRONTEND_URL,
-          },
-        }
-      );
+      return new Response(JSON.stringify({ error: "Email is required" }), {
+        status: 400,
+        headers: { 
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
+      });
     }
 
-    // --- 3️⃣ Prepare email payload for Resend ---
+    // Prepare Resend email payload
     const emailPayload = {
-      from: "info@kyroapp.co", // must be verified in Resend
+      from: "info@kyroapp.co", // Must be a verified Resend sender
       to: email,
       subject: "Welcome to the Kyro Waitlist!",
       html: `
-        <p>Hi ${name || "there"},</p>
-        <p>Thanks for joining the Kyro waitlist! We're excited to have you on board.</p>
-        <p>We'll notify you as soon as Kyro launches so you can start training anywhere!</p>
+        <p>Hi there,</p>
+        <p>Thanks for joining the Kyro waitlist! We'll notify you when Kyro launches.</p>
         <p>— The Kyro Team</p>
       `,
     };
 
-    // --- 4️⃣ Send email via Resend ---
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -69,38 +60,22 @@ Deno.serve(async (req) => {
       const text = await res.text();
       console.error("Resend API error:", text);
       return new Response(
-        JSON.stringify({ error: "Failed to send email", detail: text }),
+        JSON.stringify({ error: "Failed to send email" }),
         {
           status: 500,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": FRONTEND_URL,
-          },
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
         }
       );
     }
 
-    // --- 5️⃣ Success response ---
-    return new Response(
-      JSON.stringify({ success: true, message: "Email sent!" }),
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": FRONTEND_URL,
-        },
-      }
-    );
+    return new Response(JSON.stringify({ success: true, message: "Email sent!" }), {
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    });
   } catch (err) {
     console.error("Edge function error:", err);
-    return new Response(
-      JSON.stringify({ error: err.message }),
-      {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": FRONTEND_URL,
-        },
-      }
-    );
+    return new Response(JSON.stringify({ error: (err as Error).message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    });
   }
 });
