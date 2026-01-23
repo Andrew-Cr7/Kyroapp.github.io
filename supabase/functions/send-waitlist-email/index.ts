@@ -1,81 +1,71 @@
 // Setup type definitions for Supabase Edge Functions
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-// Read Resend API key from environment
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-if (!RESEND_API_KEY) {
-  throw new Error("RESEND_API_KEY environment variable not set");
-}
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
 
-console.log("Edge function initialized");
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
 Deno.serve(async (req) => {
-  // Handle preflight CORS requests
+  // ✅ Handle CORS preflight
   if (req.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
+      headers: corsHeaders,
     });
   }
 
   try {
+    if (!RESEND_API_KEY) {
+      throw new Error("RESEND_API_KEY not set");
+    }
+
     const { email } = await req.json();
 
     if (!email) {
-      return new Response(JSON.stringify({ error: "Email is required" }), {
-        status: 400,
-        headers: { 
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
-        },
-      });
+      return new Response(
+        JSON.stringify({ error: "Email is required" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
-
-    // Prepare Resend email payload
-    const emailPayload = {
-      from: "info@kyroapp.co", // Must be a verified Resend sender
-      to: email,
-      subject: "Welcome to the Kyro Waitlist!",
-      html: `
-        <p>Hi there,</p>
-        <p>Thanks for joining the Kyro waitlist! We'll notify you when Kyro launches.</p>
-        <p>— The Kyro Team</p>
-      `,
-    };
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        Authorization: `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(emailPayload),
+      body: JSON.stringify({
+        from: "Kyro <info@kyroapp.co>",
+        to: email,
+        subject: "Welcome to the Kyro Waitlist",
+        html: `
+          <p>Thanks for joining the Kyro waitlist!</p>
+          <p>We’ll let you know as soon as we launch.</p>
+          <p>— Team Kyro</p>
+        `,
+      }),
     });
 
     if (!res.ok) {
-      const text = await res.text();
-      console.error("Resend API error:", text);
-      return new Response(
-        JSON.stringify({ error: "Failed to send email" }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-        }
-      );
+      const errorText = await res.text();
+      console.error("Resend error:", errorText);
+      throw new Error("Failed to send email");
     }
 
-    return new Response(JSON.stringify({ success: true, message: "Email sent!" }), {
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-    });
+    return new Response(
+      JSON.stringify({ success: true }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+
   } catch (err) {
-    console.error("Edge function error:", err);
-    return new Response(JSON.stringify({ error: (err as Error).message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-    });
+    console.error(err);
+    return new Response(
+      JSON.stringify({ error: "Internal server error" }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   }
 });
