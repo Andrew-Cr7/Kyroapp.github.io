@@ -19,23 +19,29 @@ Deno.serve(async (req) => {
       throw new Error("RESEND_API_KEY not set");
     }
 
-    // ✅ SAFELY parse body
-    let body;
+    // ✅ Supabase-safe body parsing
+    let email: string | undefined;
+
     try {
-      body = await req.json();
+      const body = await req.json();
+      email = body?.email;
     } catch {
-      return new Response(
-        JSON.stringify({ error: "Invalid or empty JSON body" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      // Supabase sometimes sends body differently
+      const text = await req.text();
+      if (text) {
+        const parsed = JSON.parse(text);
+        email = parsed?.email;
+      }
     }
 
-    const { email } = body;
-
     if (!email) {
+      console.error("No email received");
       return new Response(
         JSON.stringify({ error: "Email is required" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
       );
     }
 
@@ -48,7 +54,7 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Kyro <onboarding@resend.dev>", // ✅ SAFE VERIFIED SENDER
+        from: "Kyro <onboarding@resend.dev>", // ✅ guaranteed verified
         to: email,
         subject: "Welcome to the Kyro Waitlist",
         html: `
@@ -64,19 +70,28 @@ Deno.serve(async (req) => {
       console.error("Resend error:", errorText);
       return new Response(
         JSON.stringify({ error: "Failed to send email" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
       );
     }
 
     return new Response(
       JSON.stringify({ success: true }),
-      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      }
     );
   } catch (err) {
     console.error("Edge function crash:", err);
     return new Response(
       JSON.stringify({ error: "Internal server error" }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      }
     );
   }
 });
