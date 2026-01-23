@@ -37,13 +37,17 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
       }
 
       // 2️⃣ Call Supabase Edge Function to send confirmation email via Resend
-      const response = await fetch("/functions/v1/send-waitlist-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      const response = await fetch(
+  "https://cnufqucnqdbscnskwgno.supabase.co/functions/v1/send-waitlist-email",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+    },
+    body: JSON.stringify({ email }),
+  }
+);
 
       if (!response.ok) {
         const text = await response.text();
