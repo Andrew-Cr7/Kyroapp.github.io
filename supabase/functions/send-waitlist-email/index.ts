@@ -1,4 +1,3 @@
-// Setup type definitions for Supabase Edge Functions
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 const corsHeaders = {
@@ -11,12 +10,8 @@ const corsHeaders = {
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
 Deno.serve(async (req) => {
-  // Handle CORS preflight
   if (req.method === "OPTIONS") {
-    return new Response(null, {
-      status: 204,
-      headers: corsHeaders,
-    });
+    return new Response(null, { status: 204, headers: corsHeaders });
   }
 
   try {
@@ -24,29 +19,36 @@ Deno.serve(async (req) => {
       throw new Error("RESEND_API_KEY not set");
     }
 
-    const { email } = await req.json();
+    // ✅ SAFELY parse body
+    let body;
+    try {
+      body = await req.json();
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Invalid or empty JSON body" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const { email } = body;
 
     if (!email) {
       return new Response(
         JSON.stringify({ error: "Email is required" }),
-        {
-          status: 400,
-          headers: {
-            ...corsHeaders,
-            "Content-Type": "application/json",
-          },
-        }
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    const resendResponse = await fetch("https://api.resend.com/emails", {
+    console.log("Sending waitlist email to:", email);
+
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Kyro <info@kyroapp.co>",
+        from: "Kyro <onboarding@resend.dev>", // ✅ SAFE VERIFIED SENDER
         to: email,
         subject: "Welcome to the Kyro Waitlist",
         html: `
@@ -57,33 +59,24 @@ Deno.serve(async (req) => {
       }),
     });
 
-    if (!resendResponse.ok) {
-      const errorText = await resendResponse.text();
+    if (!res.ok) {
+      const errorText = await res.text();
       console.error("Resend error:", errorText);
-      throw new Error("Failed to send email");
+      return new Response(
+        JSON.stringify({ error: "Failed to send email" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
 
     return new Response(
       JSON.stringify({ success: true }),
-      {
-        status: 200,
-        headers: {
-          ...corsHeaders,
-          "Content-Type": "application/json",
-        },
-      }
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error("Edge function crash:", err);
     return new Response(
       JSON.stringify({ error: "Internal server error" }),
-      {
-        status: 500,
-        headers: {
-          ...corsHeaders,
-          "Content-Type": "application/json",
-        },
-      }
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });
