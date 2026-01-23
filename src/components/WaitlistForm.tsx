@@ -33,24 +33,22 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
         return;
       }
 
-      // 2️⃣ Call Edge Function
-      const res = await fetch(
-        "https://cnufqucnqdbscnskwgno.functions.supabase.co/send-waitlist-email",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
-        }
-      );
+    // 2️⃣ Call Edge Function (CORS-safe)
+const { error: functionError } = await supabase.functions.invoke(
+  "send-waitlist-email",
+  {
+    body: { email },
+  }
+);
 
-      if (!res.ok) {
-        console.error("Edge Function error:", await res.text());
-        toast.success(
-          "You're on the waitlist! Email could not be sent, but we'll notify you soon."
-        );
-      } else {
-        toast.success("You're on the waitlist! Check your email.");
-      }
+if (functionError) {
+  console.error("Edge Function error:", functionError);
+  toast.success(
+    "You're on the waitlist! Email could not be sent, but we'll notify you soon."
+  );
+} else {
+  toast.success("You're on the waitlist! Check your email.");
+}
 
       // Reset UI
       setEmail("");
