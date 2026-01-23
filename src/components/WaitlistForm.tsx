@@ -1,9 +1,10 @@
+// src/components/WaitlistForm.tsx
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client"; // Make sure this path is correct
 
 interface WaitlistFormProps {
   variant?: "hero" | "section";
@@ -25,10 +26,8 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
     setIsSubmitting(true);
 
     try {
-      // 1️⃣ Save to Supabase waitlist table
-      const { error: insertError } = await supabase
-        .from("waitlist")
-        .insert([{ email }]);
+      // 1️⃣ Add to Supabase waitlist table
+      const { error: insertError } = await supabase.from("waitlist").insert([{ email }]);
 
       if (insertError) {
         console.error("Supabase insert error:", insertError);
@@ -37,8 +36,8 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
         return;
       }
 
-      // 2️⃣ Call Supabase Edge Function to send email via Resend
-      const res = await fetch("/functions/v1/send-waitlist-email", {
+      // 2️⃣ Call Supabase Edge Function to send confirmation email via Resend
+      const response = await fetch("/functions/v1/send-waitlist-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,22 +45,23 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
         body: JSON.stringify({ email }),
       });
 
-      if (!res.ok) {
-        console.error("Error calling Edge Function:", await res.text());
+      if (!response.ok) {
+        const text = await response.text();
+        console.error("Edge Function error:", text);
         toast.error("Failed to send confirmation email.");
       } else {
-        toast.success("You're on the list! Check your email.");
+        toast.success("You're on the waitlist! Check your email.");
       }
 
       // Success UI
       setIsSubmitted(true);
       setEmail("");
 
-      // Reset form after 3 seconds
+      // Reset form state after 3 seconds
       setTimeout(() => setIsSubmitted(false), 3000);
     } catch (err) {
       console.error(err);
-      toast.error("Something went wrong. Try again later.");
+      toast.error("Something went wrong. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -69,63 +69,22 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
 
   const inputClass = "h-14 flex-1 text-base bg-card/90 backdrop-blur-sm";
 
-  if (variant === "hero") {
-    return (
-      <form onSubmit={handleSubmit} className="w-full max-w-md">
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="h-14 flex-1 bg-card/90 backdrop-blur-sm text-base"
-            disabled={isSubmitting || isSubmitted}
-          />
-          <Button
-            type="submit"
-            variant="hero"
-            size="lg"
-            className="h-14 min-w-[160px]"
-            disabled={isSubmitting || isSubmitted}
-          >
-            {isSubmitting ? (
-              <Loader2 className="h-5 w-5 animate-spin" />
-            ) : isSubmitted ? (
-              <>
-                <Check className="h-5 w-5" />
-                Joined!
-              </>
-            ) : (
-              <>
-                Join Waitlist
-                <ArrowRight className="h-5 w-5" />
-              </>
-            )}
-          </Button>
-        </div>
-        <p className="mt-3 text-sm text-muted-foreground">
-          Join the founding waitlist. Early access, exclusive perks and a growing community.
-        </p>
-      </form>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="mx-auto w-full max-w-lg">
+    <form onSubmit={handleSubmit} className={variant === "hero" ? "w-full max-w-md" : "mx-auto w-full max-w-lg"}>
       <div className="flex flex-col gap-3 sm:flex-row">
         <Input
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="h-14 flex-1 text-base"
+          className={inputClass}
           disabled={isSubmitting || isSubmitted}
         />
         <Button
           type="submit"
           variant="hero"
           size="lg"
-          className="h-14 min-w-[180px]"
+          className="h-14 min-w-[160px] sm:min-w-[180px]"
           disabled={isSubmitting || isSubmitted}
         >
           {isSubmitting ? (
@@ -133,16 +92,21 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
           ) : isSubmitted ? (
             <>
               <Check className="h-5 w-5" />
-              You're in!
+              {variant === "hero" ? "Joined!" : "You're in!"}
             </>
           ) : (
             <>
-              Get Early Access
+              {variant === "hero" ? "Join Waitlist" : "Get Early Access"}
               <ArrowRight className="h-5 w-5" />
             </>
           )}
         </Button>
       </div>
+      {variant === "hero" && (
+        <p className="mt-3 text-sm text-muted-foreground">
+          Join the founding waitlist. Early access, exclusive perks and a growing community.
+        </p>
+      )}
     </form>
   );
 };
