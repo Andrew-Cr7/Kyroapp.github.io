@@ -25,7 +25,12 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
 
     try {
       // 1️⃣ Insert into Supabase table
-      const { error } = await supabase.from("waitlist").insert([{ email }]);
+      const { error } = await supabase
+  .from("waitlist")
+  .upsert(
+    { email },
+    { onConflict: "email", ignoreDuplicates: true }
+  );
       if (error) {
         console.error("Supabase insert error:", error);
         toast.error("Failed to join waitlist. Try again later.");
