@@ -107,7 +107,7 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
           </Button>
         </div>
         <p className="mt-3 text-sm text-muted-foreground">
-          Be first to know when we launch. No spam, ever.
+          Join the founding waitlist. Early access, exclusive perks and a growing community.
         </p>
       </form>
     );
