@@ -1,109 +1,158 @@
-console.log("FUNCTION HIT");
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
-<<<<<<< HEAD
-Deno.serve(async (req) => {
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "authorization, content-type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+interface WaitlistFormProps {
+  variant?: "hero" | "section";
+}
+
+const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    if (email.length > 255) {
+      toast.error("Email address is too long");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const normalizedEmail = email.toLowerCase().trim();
+
+      // 1️⃣ Insert into waitlist
+      const { error: insertError } = await supabase
+        .from("waitlist")
+        .insert({ email: normalizedEmail });
+
+      if (insertError) {
+        if (insertError.code === "23505") {
+          toast.info("You're already on the waitlist!");
+          setIsSubmitted(true);
+          return;
+        }
+
+        console.error("Waitlist insert error:", insertError);
+        toast.error("Something went wrong. Please try again.");
+        return;
+      }
+
+      // 2️⃣ Call Edge Function (SAFE WAY)
+      const { error: functionError } = await supabase.functions.invoke(
+        "send-waitlist-email",
+        {
+          body: { email: normalizedEmail },
+        }
+      );
+
+      if (functionError) {
+        console.error("Email function error:", functionError);
+        // Do NOT fail signup if email fails
+      }
+
+      toast.success("You're on the list! We'll be in touch soon.");
+      setIsSubmitted(true);
+    } catch (err) {
+      console.error("Waitlist submission error:", err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+      setEmail("");
+      setTimeout(() => setIsSubmitted(false), 3000);
+    }
   };
 
-  // ✅ Handle CORS preflight
-=======
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+  /* ---------------- HERO VARIANT ---------------- */
+  if (variant === "hero") {
+    return (
+      <form onSubmit={handleSubmit} className="w-full max-w-md">
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="h-14 flex-1 bg-card/90 backdrop-blur-sm text-base"
+            disabled={isSubmitting || isSubmitted}
+          />
+          <Button
+            type="submit"
+            variant="hero"
+            size="lg"
+            className="h-14 min-w-[160px]"
+            disabled={isSubmitting || isSubmitted}
+          >
+            {isSubmitting ? (
+              <Loader2 className="h-5 w-5 animate-spin" />
+            ) : isSubmitted ? (
+              <>
+                <Check className="h-5 w-5" />
+                Joined!
+              </>
+            ) : (
+              <>
+                Join Waitlist
+                <ArrowRight className="h-5 w-5" />
+              </>
+            )}
+          </Button>
+        </div>
+        <p className="mt-3 text-sm text-muted-foreground">
+          Be first to know when we launch. No spam, ever.
+        </p>
+      </form>
+    );
+  }
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  /* ---------------- SECTION VARIANT ---------------- */
+  return (
+    <form onSubmit={handleSubmit} className="mx-auto w-full max-w-lg">
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <Input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="h-14 flex-1 text-base"
+          disabled={isSubmitting || isSubmitted}
+        />
+        <Button
+          type="submit"
+          variant="hero"
+          size="lg"
+          className="h-14 min-w-[180px]"
+          disabled={isSubmitting || isSubmitted}
+        >
+          {isSubmitting ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
+          ) : isSubmitted ? (
+            <>
+              <Check className="h-5 w-5" />
+              You're in!
+            </>
+          ) : (
+            <>
+              Get Early Access
+              <ArrowRight className="h-5 w-5" />
+            </>
+          )}
+        </Button>
+      </div>
+    </form>
+  );
 };
 
-Deno.serve(async (req) => {
->>>>>>> 341f3529366595d3d4f805829cbeedcfe683458c
-  if (req.method === "OPTIONS") {
-    return new Response(null, { status: 204, headers: corsHeaders });
-  }
-
-  try {
-<<<<<<< HEAD
-    // ← THIS IS WHERE YOU PARSE THE JSON BODY
-    const data = await req.json();  // <-- parse JSON from frontend
-    const email = data.email;       // <-- extract email
-    if (!email) throw new Error("Email is required");
-
-    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-    if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY not set");
-
-    // Send email via Resend
-=======
-    if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY not set");
-
-    const { email } = await req.json().catch(() => ({}));
-    if (!email) throw new Error("Email is required");
-
->>>>>>> 341f3529366595d3d4f805829cbeedcfe683458c
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-<<<<<<< HEAD
-        from: "Kyro <info@kyroapp.co>",
-=======
-        from: "Kyro <info@kyroapp.co>", // Verified sender
->>>>>>> 341f3529366595d3d4f805829cbeedcfe683458c
-        to: email,
-        subject: "Welcome to the Kyro Waitlist",
-        html: `
-          <p>Thanks for joining the Kyro waitlist!</p>
-          <p>We’ll notify you as soon as we launch.</p>
-<<<<<<< HEAD
-=======
-          <p>— Team Kyro</p>
->>>>>>> 341f3529366595d3d4f805829cbeedcfe683458c
-        `,
-      }),
-    });
-
-    if (!res.ok) {
-<<<<<<< HEAD
-      const errorText = await res.text();
-      console.error("Resend error:", errorText);
-      throw new Error("Failed to send email");
-    }
-
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-
-  } catch (err) {
-    console.error(err);
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
-=======
-      const text = await res.text();
-      console.error("Resend API error:", text);
-      throw new Error("Failed to send email");
-    }
-
-    return new Response(
-      JSON.stringify({ success: true }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
-
-  } catch (err) {
-    console.error("Edge function error:", err);
-    return new Response(
-      JSON.stringify({ error: err.message }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
->>>>>>> 341f3529366595d3d4f805829cbeedcfe683458c
-  }
-});
+export default WaitlistForm;
