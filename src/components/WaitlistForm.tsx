@@ -42,12 +42,18 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
       }
 
       // 2️⃣ Call Edge Function (send email)
-      const { error: functionError } = await supabase.functions.invoke(
-        "send-waitlist-email",
-        {
-          body: { email: email.toLowerCase().trim() },
-        }
-      );
+      const anonKey = "sb_publishable_9sjXG-KTC1IGVX2qW4cRYw_qYqVZWAP";
+const url = "https://cnufqucnqdbscnskwgno.supabase.co/functions/v1/send-waitlist-email";
+
+const emailResponse = await fetch(url, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    apikey: anonKey,
+    Authorization: `Bearer ${anonKey}`,
+  },
+  body: JSON.stringify({ email: normalizedEmail }),
+});
 
       if (functionError) {
         console.error("Edge function error:", functionError);
