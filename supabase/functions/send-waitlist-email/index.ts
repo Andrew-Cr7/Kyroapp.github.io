@@ -1,3 +1,5 @@
+console.log("FUNCTION HIT");
+
 <<<<<<< HEAD
 Deno.serve(async (req) => {
   const corsHeaders = {
