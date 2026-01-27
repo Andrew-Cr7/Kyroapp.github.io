@@ -40,14 +40,92 @@ serve(async (req) => {
       );
     }
 
-    const result = await resend.emails.send({
-      from: "Kyro <info@kyroapp.co>", // must be verified in Resend
-      to: [email],
-      subject: "Welcome to the Kyro waitlist",
-      html: `<p>You're on the list — we'll be in touch soon.</p>`,
-    });
+const result = await resend.emails.send({
+  from: "Kyro <info@kyroapp.co>", // must be verified in Resend
+  to: [email],
+  subject: "You’re officially in — welcome to the Kyro founding group 🚀",
+  html: `
+    <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #111;">
+      
+      <h1 style="font-size: 24px; margin-bottom: 16px;">
+        Welcome to Kyro 👋
+      </h1>
 
-    console.log("Resend response:", result);
+      <p style="font-size: 16px; line-height: 1.6;">
+        You’re officially on the <strong>Kyro founding waitlist</strong> — and that actually means something.
+      </p>
+
+      <p style="font-size: 16px; line-height: 1.6;">
+        Kyro is being built for people who train while travelling, working remotely, or living abroad —
+        and as an early member, you’ll help shape what we build next.
+      </p>
+
+      <hr style="margin: 24px 0;" />
+
+      <h2 style="font-size: 20px; margin-bottom: 12px;">
+        🎯 What you get as a founding member
+      </h2>
+
+      <ul style="font-size: 16px; line-height: 1.6; padding-left: 20px;">
+        <li>Early access before public launch</li>
+        <li>Direct feedback line to the founders</li>
+        <li>Exclusive giveaways and perks (free passes, upgrades, partner rewards and more!)</li>
+        <li>Influence on features and partner gyms</li>
+      </ul>
+
+      <hr style="margin: 24px 0;" />
+
+      <h2 style="font-size: 20px; margin-bottom: 12px;">
+        💬 Join the Kyro community
+      </h2>
+
+      <p style="font-size: 16px; line-height: 1.6;">
+        We’ve set up a private community where founding members can:
+      </p>
+
+      <ul style="font-size: 16px; line-height: 1.6; padding-left: 20px;">
+        <li>Get behind-the-scenes updates</li>
+        <li>Help shape what Kyro becomes</li>
+        <li>Enter exclusive giveaways</li>
+        <li>Connect with other travellers & gym-goers</li>
+      </ul>
+
+      <div style="margin: 24px 0; text-align: center;">
+        <a
+          href="https://discord.gg/JBPKhxzAh2"
+          style="
+            display: inline-block;
+            padding: 14px 24px;
+            background-color: #111;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 6px;
+          "
+        >
+          👉 Join the Kyro Discord
+        </a>
+      </div>
+
+      <p style="font-size: 14px; line-height: 1.6; color: #555;">
+        Not on Discord? No problem — we’ll also be sending occasional email updates with early access and important announcements.
+      </p>
+
+      <p style="font-size: 16px; line-height: 1.6; margin-top: 24px;">
+        Thanks for backing Kyro early, we’re excited to build this with you.
+      </p>
+
+      <p style="font-size: 16px; line-height: 1.6;">
+        <li>Robert & Andrew</li>
+        <li>Founders of Kyro</li>
+        <li>Train Anywhere. Train Kyro.</li>
+      </p>
+    </div>
+  `,
+});
+
+console.log("Resend response:", result);
+
 
     return new Response(
       JSON.stringify({ success: true }),
