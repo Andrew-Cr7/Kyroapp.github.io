@@ -68,6 +68,17 @@ if (!res.ok) {
 } else {
   toast.success("You're on the waitlist! Check your email 📩");
 }
+      
+      setIsSubmitted(true);
+      setEmail("");
+    } catch (err) {
+      console.error("Submit error:", err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setIsSubmitted(false), 3000);
+    }
+  };
 
   /* ---------------- HERO VARIANT ---------------- */
 
@@ -149,6 +160,6 @@ if (!res.ok) {
       </div>
     </form>
   );
-}
+};
 
 export default WaitlistForm;
