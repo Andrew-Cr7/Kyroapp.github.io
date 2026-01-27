@@ -42,39 +42,32 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
       }
 
       // 2️⃣ Call Edge Function (send email)
-      const anonKey = "sb_publishable_9sjXG-KTC1IGVX2qW4cRYw_qYqVZWAP";
-const url = "https://cnufqucnqdbscnskwgno.supabase.co/functions/v1/send-waitlist-email";
+const emailToSend = email.toLowerCase().trim();
 
-const emailResponse = await fetch(url, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    apikey: anonKey,
-    Authorization: `Bearer ${anonKey}`,
-  },
-  body: JSON.stringify({ email: normalizedEmail }),
-});
+const res = await fetch(
+  "https://cnufqucnqdbscnskwgno.supabase.co/functions/v1/send-waitlist-email",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+    },
+    body: JSON.stringify({
+      email: emailToSend,
+    }),
+  }
+);
 
-      if (functionError) {
-        console.error("Edge function error:", functionError);
-        toast.success(
-          "You're on the waitlist! Email couldn't be sent, but we'll be in touch."
-        );
-      } else {
-        toast.success("You're on the waitlist! Check your email 📩");
-      }
+if (!res.ok) {
+  const err = await res.json().catch(() => ({}));
+  console.error("Edge Function failed:", res.status, err);
 
-      setIsSubmitted(true);
-      setEmail("");
-
-      setTimeout(() => setIsSubmitted(false), 3000);
-    } catch (err) {
-      console.error("Waitlist submission error:", err);
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  // IMPORTANT: still show success if signup worked
+  toast.success("You're on the waitlist! We'll be in touch soon.");
+} else {
+  toast.success("You're on the waitlist! Check your email 📩");
+}
 
   /* ---------------- HERO VARIANT ---------------- */
 
