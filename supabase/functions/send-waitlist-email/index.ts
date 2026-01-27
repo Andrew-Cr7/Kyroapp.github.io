@@ -118,16 +118,17 @@ const result = await resend.emails.send({
         Not on Discord? No problem — we’ll also be sending occasional email updates with early access and important announcements.
       </p>
 
-      <p style="font-size: 16px; line-height: 1.6; margin-top: 24px;">
-        Thanks for backing Kyro early, we’re excited to build this with you.
-      </p>
+     <div style="margin-top: 24px; font-family: Arial, sans-serif; color: #333;">
+  <p style="font-size: 16px; line-height: 1.6; margin: 0;">
+    Thanks for backing Kyro early — we’re excited to build this with you.
+  </p>
 
-      <p style="font-size: 16px; line-height: 1.6;">
-        <li>Robert & Andrew</li>
-        <li>Founders of Kyro</li>
-        <li>Train Anywhere. Train Kyro.</li>
-      </p>
-    </div>
+  <div style="margin-top: 24px; line-height: 1.4;">
+    <p style="margin: 0; font-weight: bold; font-size: 16px;">Robert & Andrew</p>
+    <p style="margin: 0; font-size: 14px; color: #555;">Founders of Kyro</p>
+    <p style="margin: 0; font-size: 14px; color: #555; font-style: italic;">Train Anywhere. Train Kyro.</p>
+  </div>
+</div>
   `,
 });
 
