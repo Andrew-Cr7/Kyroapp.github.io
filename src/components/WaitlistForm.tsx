@@ -149,6 +149,6 @@ if (!res.ok) {
       </div>
     </form>
   );
-};
+}
 
 export default WaitlistForm;
