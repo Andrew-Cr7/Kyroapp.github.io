@@ -50,7 +50,7 @@ serve(async (req) => {
 const result = await resend.emails.send({
   from: "Kyro <info@kyroapp.co>", // must be verified in Resend
   to: [email],
-  subject: "You’re officially in — welcome to the Kyro founding group 🚀",
+  subject: "You’re officially in! Welcome to the Kyro founding group 🚀",
   html: `
     <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #111;">
       
@@ -59,11 +59,11 @@ const result = await resend.emails.send({
       </h1>
 
       <p style="font-size: 16px; line-height: 1.6;">
-        You’re officially on the <strong>Kyro founding waitlist</strong> — and that actually means something.
+        You’re officially on the <strong>Kyro founding waitlist</strong> and that actually means something.
       </p>
 
       <p style="font-size: 16px; line-height: 1.6;">
-        Kyro is being built for people who train while travelling, working remotely, or living abroad —
+        Kyro is being built for people who train while travelling, working remotely, or living abroad
         and as an early member, you’ll help shape what we build next.
       </p>
 
@@ -91,7 +91,7 @@ const result = await resend.emails.send({
       </p>
 
       <ul style="font-size: 16px; line-height: 1.6; padding-left: 20px;">
-        <li>Get behind-the-scenes updates</li>
+        <li>Get behind the scenes updates</li>
         <li>Help shape what Kyro becomes</li>
         <li>Enter exclusive giveaways</li>
         <li>Connect with other travellers & gym-goers</li>
@@ -115,12 +115,12 @@ const result = await resend.emails.send({
       </div>
 
       <p style="font-size: 14px; line-height: 1.6; color: #555;">
-        Not on Discord? No problem — we’ll also be sending occasional email updates with early access and important announcements.
+        Not on Discord? No problem, we’ll also be sending occasional email updates with early access and important announcements.
       </p>
 
      <div style="margin-top: 24px; font-family: Arial, sans-serif; color: #333;">
   <p style="font-size: 16px; line-height: 1.6; margin: 0;">
-    Thanks for backing Kyro early — we’re excited to build this with you.
+    Thanks for backing Kyro early! We’re excited to build this with you.
   </p>
 
   <div style="margin-top: 24px; line-height: 1.4;">
