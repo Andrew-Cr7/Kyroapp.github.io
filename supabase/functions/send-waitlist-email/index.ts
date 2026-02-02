@@ -67,7 +67,7 @@ const result = await resend.emails.send({
         and as an early member, you’ll help shape what we build next.
       </p>
 
-      <hr style="margin: 24px 0;" />
+      
 
       <h2 style="font-size: 20px; margin-bottom: 12px;">
         🎯 What you get as a founding member
@@ -80,7 +80,7 @@ const result = await resend.emails.send({
         <li>Influence on features and partner gyms</li>
       </ul>
 
-      <hr style="margin: 24px 0;" />
+      
 
       <h2 style="font-size: 20px; margin-bottom: 12px;">
         💬 Join the Kyro community
