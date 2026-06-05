@@ -53,47 +53,43 @@ const LondonGymDayPasses = () => {
       <Header />
 
       <main>
-        <section className="kyro-section">
-          <div className="kyro-container">
-            <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-              <div>
-                <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-semibold text-primary">
-                    London Launch Coming Soon
-                  </span>
-                </div>
-
-                <h1 className="mb-6 font-display text-4xl font-bold leading-tight text-foreground md:text-6xl">
-                  London gym day passes without long-term memberships
-                </h1>
-
-                <p className="mb-6 text-lg text-muted-foreground md:text-xl">
-                  Kyro helps travellers, digital nomads and visitors find
-                  flexible gym access in London through day, week and month
-                  passes.
-                </p>
-
-                <p className="mb-8 text-muted-foreground">
-                  No annual contracts. No complicated sign-up process. Just a
-                  simpler way to train while you are in the city.
-                </p>
-
-                <a
-                  href="#waitlist"
-                  className="inline-flex rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-elevated transition hover:opacity-90"
-                >
-                  Join the London waitlist
-                </a>
+        <section
+          className="relative flex min-h-screen items-center overflow-hidden"
+          style={{
+            backgroundImage: `linear-gradient(rgba(20, 32, 26, 0.72), rgba(20, 32, 26, 0.72)), url(${heroGym})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="kyro-container relative z-10 pt-24">
+            <div className="max-w-3xl">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm">
+                <MapPin className="h-4 w-4 text-white" />
+                <span className="text-sm font-semibold text-white">
+                  London Launch Coming Soon
+                </span>
               </div>
 
-              <div className="overflow-hidden rounded-3xl shadow-elevated">
-                <img
-                  src={heroGym}
-                  alt="Flexible gym day passes in London with Kyro"
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              <h1 className="mb-6 font-display text-4xl font-bold leading-tight text-white md:text-6xl">
+                London gym day passes without long-term memberships
+              </h1>
+
+              <p className="mb-6 text-lg text-white/85 md:text-xl">
+                Kyro helps travellers, digital nomads and visitors find flexible
+                gym access in London through day, week and month passes.
+              </p>
+
+              <p className="mb-8 max-w-2xl text-white/80">
+                No annual contracts. No complicated sign-up process. Just a
+                simpler way to train while you are in the city.
+              </p>
+
+              <a
+                href="#waitlist"
+                className="inline-flex rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-elevated transition hover:opacity-90"
+              >
+                Join the London waitlist
+              </a>
             </div>
           </div>
         </section>
@@ -106,10 +102,10 @@ const LondonGymDayPasses = () => {
               </h2>
 
               <p className="text-lg text-muted-foreground">
-                London has plenty of gyms, but finding one that offers
-                short-term access can still be frustrating. Many gyms focus on
-                memberships, contracts or joining fees, which often makes no
-                sense if you are only visiting for a few days or weeks.
+                London has plenty of gyms, but finding one that offers short-term
+                access can still be frustrating. Many gyms focus on memberships,
+                contracts or joining fees, which often makes no sense if you are
+                only visiting for a few days or weeks.
               </p>
             </div>
 
@@ -250,8 +246,7 @@ const LondonGymDayPasses = () => {
                   </h3>
                   <p className="text-muted-foreground">
                     Kyro is preparing for launch and onboarding gyms. Join the
-                    waitlist to be notified when London access becomes
-                    available.
+                    waitlist to be notified when London access becomes available.
                   </p>
                 </div>
 
