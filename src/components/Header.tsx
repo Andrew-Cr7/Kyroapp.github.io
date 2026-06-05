@@ -12,22 +12,8 @@ const Header = () => {
     { label: "FAQ", href: "/#faq" },
   ];
 
-  const handleNavClick = (href: string) => {
-    setIsMenuOpen(false);
-
-    if (href.startsWith("/#")) {
-      window.location.href = href;
-      return;
-    }
-
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
       <div className="kyro-container">
         <div className="flex h-20 items-center justify-between">
           <a href="/" className="flex items-center gap-2" aria-label="Kyro - Home">
@@ -41,24 +27,20 @@ const Header = () => {
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
             {navLinks.map((link) => (
-              <button
+              <a
                 key={link.label}
-                onClick={() => handleNavClick(link.href)}
+                href={link.href}
                 className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 aria-label={`Navigate to ${link.label} section`}
               >
                 {link.label}
-              </button>
+              </a>
             ))}
           </nav>
 
           <div className="hidden md:block">
-            <Button
-              variant="hero"
-              size="default"
-              onClick={() => handleNavClick("/#waitlist")}
-            >
-              Join Waitlist
+            <Button variant="hero" size="default" asChild>
+              <a href="/#waitlist">Join Waitlist</a>
             </Button>
           </div>
 
@@ -79,22 +61,20 @@ const Header = () => {
           <div className="absolute left-0 right-0 top-20 border-b border-border bg-background p-6 md:hidden">
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <button
+                <a
                   key={link.label}
-                  onClick={() => handleNavClick(link.href)}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
                   className="text-left text-lg font-medium text-foreground transition-colors hover:text-primary"
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
 
-              <Button
-                variant="hero"
-                size="lg"
-                className="mt-4"
-                onClick={() => handleNavClick("/#waitlist")}
-              >
-                Join Waitlist
+              <Button variant="hero" size="lg" className="mt-4" asChild>
+                <a href="/#waitlist" onClick={() => setIsMenuOpen(false)}>
+                  Join Waitlist
+                </a>
               </Button>
             </nav>
           </div>
