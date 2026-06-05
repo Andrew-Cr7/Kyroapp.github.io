@@ -1,3 +1,7 @@
+import Header from "@/components/Header";
+import WaitlistCTA from "@/components/WaitlistCTA";
+import Footer from "@/components/Footer";
+import FAQ from "@/components/FAQ";
 const LondonGymDayPasses = () => {
   return (
     <main style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 20px" }}>
