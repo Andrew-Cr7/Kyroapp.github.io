@@ -2,7 +2,15 @@ import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import WaitlistCTA from "@/components/WaitlistCTA";
 import Footer from "@/components/Footer";
-import { MapPin, Dumbbell, Plane, Briefcase, Clock, CheckCircle } from "lucide-react";
+import {
+  MapPin,
+  Dumbbell,
+  Plane,
+  Briefcase,
+  Clock,
+  CheckCircle,
+} from "lucide-react";
+import heroGym from "@/assets/hero-gym.jpg";
 
 const LondonGymDayPasses = () => {
   return (
@@ -23,9 +31,12 @@ const LondonGymDayPasses = () => {
           property="og:description"
           content="Find flexible gym day passes in London without long-term memberships. Join the Kyro waitlist for early access."
         />
-        <meta property="og:url" content="https://kyroapp.co/london-gym-day-passes" />
+        <meta
+          property="og:url"
+          content="https://kyroapp.co/london-gym-day-passes"
+        />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://kyroapp.co/og-image.png" />
+        <meta property="og:image" content={heroGym} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta
@@ -36,7 +47,7 @@ const LondonGymDayPasses = () => {
           name="twitter:description"
           content="Find flexible gym day passes in London without long-term memberships. Join the Kyro waitlist for early access."
         />
-        <meta name="twitter:image" content="https://kyroapp.co/og-image.png" />
+        <meta name="twitter:image" content={heroGym} />
       </Helmet>
 
       <Header />
@@ -58,8 +69,9 @@ const LondonGymDayPasses = () => {
                 </h1>
 
                 <p className="mb-6 text-lg text-muted-foreground md:text-xl">
-                  Kyro helps travellers, digital nomads and visitors find flexible
-                  gym access in London through day, week and month passes.
+                  Kyro helps travellers, digital nomads and visitors find
+                  flexible gym access in London through day, week and month
+                  passes.
                 </p>
 
                 <p className="mb-8 text-muted-foreground">
@@ -77,8 +89,8 @@ const LondonGymDayPasses = () => {
 
               <div className="overflow-hidden rounded-3xl shadow-elevated">
                 <img
-                  src="/og-image.png"
-                  alt="Kyro flexible gym day passes for travellers in London"
+                  src={heroGym}
+                  alt="Flexible gym day passes in London with Kyro"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -94,10 +106,10 @@ const LondonGymDayPasses = () => {
               </h2>
 
               <p className="text-lg text-muted-foreground">
-                London has plenty of gyms, but finding one that offers short-term
-                access can still be frustrating. Many gyms focus on memberships,
-                contracts or joining fees, which often makes no sense if you are
-                only visiting for a few days or weeks.
+                London has plenty of gyms, but finding one that offers
+                short-term access can still be frustrating. Many gyms focus on
+                memberships, contracts or joining fees, which often makes no
+                sense if you are only visiting for a few days or weeks.
               </p>
             </div>
 
@@ -168,7 +180,10 @@ const LondonGymDayPasses = () => {
                     text: "For anyone who wants access without being locked into one gym or one contract.",
                   },
                 ].map((item) => (
-                  <div key={item.title} className="rounded-2xl bg-card p-6 shadow-soft">
+                  <div
+                    key={item.title}
+                    className="rounded-2xl bg-card p-6 shadow-soft"
+                  >
                     <item.icon className="mb-4 h-7 w-7 text-primary" />
                     <h3 className="mb-2 font-display text-xl font-bold">
                       {item.title}
@@ -235,7 +250,8 @@ const LondonGymDayPasses = () => {
                   </h3>
                   <p className="text-muted-foreground">
                     Kyro is preparing for launch and onboarding gyms. Join the
-                    waitlist to be notified when London access becomes available.
+                    waitlist to be notified when London access becomes
+                    available.
                   </p>
                 </div>
 
