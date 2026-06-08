@@ -56,11 +56,33 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
     setIsSubmitting(true);
 
     try {
-      const emailToSend = email.toLowerCase().trim();
+const emailToSend = email.toLowerCase().trim();
 
-      const { error } = await supabase
-        .from("waitlist")
-        .insert({ email: emailToSend });
+const urlParams = new URLSearchParams(window.location.search);
+
+const getStoredOrCurrentParam = (key: string) => {
+  const currentValue = urlParams.get(key);
+
+  if (currentValue) {
+    localStorage.setItem(key, currentValue);
+    return currentValue;
+  }
+
+  return localStorage.getItem(key);
+};
+
+const attributionData = {
+  email: emailToSend,
+  utm_source: getStoredOrCurrentParam("utm_source"),
+  utm_medium: getStoredOrCurrentParam("utm_medium"),
+  utm_campaign: getStoredOrCurrentParam("utm_campaign"),
+  landing_page: window.location.pathname,
+  referrer: document.referrer || null,
+};
+
+const { error } = await supabase
+  .from("waitlist")
+  .insert(attributionData);
 
       if (error) {
         if (error.code === "23505") {
