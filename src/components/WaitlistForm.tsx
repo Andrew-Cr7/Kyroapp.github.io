@@ -56,33 +56,38 @@ const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
     setIsSubmitting(true);
 
     try {
-const emailToSend = email.toLowerCase().trim();
+      const emailToSend = email.toLowerCase().trim();
 
-const urlParams = new URLSearchParams(window.location.search);
+      const urlParams = new URLSearchParams(window.location.search);
 
-const getStoredOrCurrentParam = (key: string) => {
-  const currentValue = urlParams.get(key);
+      const getStoredOrCurrentParam = (key: string) => {
+        const currentValue = urlParams.get(key);
 
-  if (currentValue) {
-    localStorage.setItem(key, currentValue);
-    return currentValue;
-  }
+        if (currentValue) {
+          localStorage.setItem(key, currentValue);
+          return currentValue;
+        }
 
-  return localStorage.getItem(key);
-};
+        return localStorage.getItem(key);
+      };
 
-const attributionData = {
-  email: emailToSend,
-  utm_source: getStoredOrCurrentParam("utm_source"),
-  utm_medium: getStoredOrCurrentParam("utm_medium"),
-  utm_campaign: getStoredOrCurrentParam("utm_campaign"),
-  landing_page: window.location.pathname,
-  referrer: document.referrer || null,
-};
+      // This captures referral links like:
+      // https://kyroapp.co?ref=ABC123
+      const referralCode = getStoredOrCurrentParam("ref");
 
-const { error } = await supabase
-  .from("waitlist")
-  .insert(attributionData);
+      const attributionData = {
+        email: emailToSend,
+        utm_source: getStoredOrCurrentParam("utm_source"),
+        utm_medium: getStoredOrCurrentParam("utm_medium"),
+        utm_campaign: getStoredOrCurrentParam("utm_campaign"),
+        landing_page: window.location.pathname,
+        referrer: document.referrer || null,
+        referred_by: referralCode,
+      };
+
+      const { error } = await supabase
+        .from("waitlist")
+        .insert(attributionData);
 
       if (error) {
         if (error.code === "23505") {
@@ -98,7 +103,10 @@ const { error } = await supabase
           return;
         }
       } else {
-        trackEvent("waitlist_success", { form_variant: variant });
+        trackEvent("waitlist_success", {
+          form_variant: variant,
+          referred_by: referralCode,
+        });
       }
 
       const res = await fetch(
@@ -180,8 +188,8 @@ const { error } = await supabase
           </Button>
         </div>
         <p className="mt-3 text-sm text-muted-foreground">
-          Join the founding waitlist. Early access, exclusive perks and a growing
-          community.
+          Join the founding waitlist. Early access, exclusive perks and launch
+          rewards.
         </p>
       </form>
     );
