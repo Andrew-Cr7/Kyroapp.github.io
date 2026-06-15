@@ -15,40 +15,45 @@ import heroGym from "@/assets/hero-gym.jpg";
 const LondonGymDayPasses = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>London Gym Day Passes | Flexible Gym Access with Kyro</title>
-        <meta
-          name="description"
-          content="Find London gym day passes and flexible gym access without long-term memberships. Kyro helps travellers, digital nomads and visitors train while in London."
-        />
-        <link rel="canonical" href="https://kyroapp.co/london-gym-day-passes" />
+<Helmet>
+  <title>London Gym Day Passes | Flexible Gym Access in London | Kyro</title>
 
-        <meta
-          property="og:title"
-          content="London Gym Day Passes | Flexible Gym Access with Kyro"
-        />
-        <meta
-          property="og:description"
-          content="Find flexible gym day passes in London without long-term memberships. Join the Kyro waitlist for early access."
-        />
-        <meta
-          property="og:url"
-          content="https://kyroapp.co/london-gym-day-passes"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content={heroGym} />
+  <meta
+    name="description"
+    content="Find flexible gym day passes in London with Kyro. Access gyms without long-term contracts, ideal for travellers, digital nomads, remote workers and visitors staying in London."
+  />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="London Gym Day Passes | Flexible Gym Access with Kyro"
-        />
-        <meta
-          name="twitter:description"
-          content="Find flexible gym day passes in London without long-term memberships. Join the Kyro waitlist for early access."
-        />
-        <meta name="twitter:image" content={heroGym} />
-      </Helmet>
+  <link
+    rel="canonical"
+    href="https://kyroapp.co/london-gym-day-passes"
+  />
+
+  <meta
+    property="og:title"
+    content="London Gym Day Passes | Flexible Gym Access in London | Kyro"
+  />
+  <meta
+    property="og:description"
+    content="Find flexible gym day passes in London without long-term contracts. Join Kyro for flexible day, week and month gym access."
+  />
+  <meta
+    property="og:url"
+    content="https://kyroapp.co/london-gym-day-passes"
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://kyroapp.co/og-image.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:title"
+    content="London Gym Day Passes | Flexible Gym Access in London | Kyro"
+  />
+  <meta
+    name="twitter:description"
+    content="Find flexible gym day passes in London without long-term contracts. Built for travellers, remote workers and visitors."
+  />
+  <meta name="twitter:image" content="https://kyroapp.co/og-image.png" />
+</Helmet>
 
       <Header />
 
