@@ -3,6 +3,12 @@ import { Instagram, X, Linkedin } from "lucide-react";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const footerLinks = [
+    { label: "Home", href: "/" },
+    { label: "For Gyms", href: "/for-gyms" },
+    { label: "London Gym Day Passes", href: "/london-gym-day-passes" },
+  ];
+
   return (
     <footer className="border-t border-border bg-secondary/30 py-12">
       <div className="kyro-container">
@@ -19,6 +25,21 @@ const Footer = () => {
           <p className="text-center text-sm text-muted-foreground">
             Train Anywhere. Train Kyro.
           </p>
+
+          <nav
+            className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium text-muted-foreground"
+            aria-label="Footer navigation"
+          >
+            {footerLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="transition-colors hover:text-primary"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
           {/* Social Links */}
           <div className="flex items-center gap-4">

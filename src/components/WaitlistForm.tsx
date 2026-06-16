@@ -4,29 +4,11 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { trackEvent } from "@/lib/analytics";
 
 interface WaitlistFormProps {
   variant?: "hero" | "section";
 }
-
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-    clarity?: (...args: any[]) => void;
-  }
-}
-
-const trackEvent = (eventName: string, eventParams = {}) => {
-  if (typeof window === "undefined") return;
-
-  window.gtag?.("event", eventName, {
-    page_path: window.location.pathname,
-    page_location: window.location.href,
-    ...eventParams,
-  });
-
-  window.clarity?.("event", eventName);
-};
 
 const WaitlistForm = ({ variant = "hero" }: WaitlistFormProps) => {
   const [email, setEmail] = useState("");

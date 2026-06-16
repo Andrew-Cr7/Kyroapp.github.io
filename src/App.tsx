@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LondonGymDayPasses from "./pages/LondonGymDayPasses";
+import ForGyms from "./pages/ForGyms";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,8 @@ const App = () => (
               path="/london-gym-day-passes"
               element={<LondonGymDayPasses />}
             />
+
+            <Route path="/for-gyms" element={<ForGyms />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
