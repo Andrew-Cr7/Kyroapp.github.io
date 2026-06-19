@@ -16,6 +16,23 @@ const Footer = () => {
       label: "Tourist Gyms in London",
       href: "/can-tourists-use-gyms-in-london",
     },
+    {
+      label: "Fitness While Travelling",
+      href: "/fitness-while-travelling-guide",
+    },
+    {
+      label: "Digital Nomad Gym Access",
+      href: "/gym-access-for-digital-nomads",
+    },
+    {
+      label: "Business Travel Gym Access",
+      href: "/business-travel-gym-access",
+    },
+    { label: "Visitor Gym Access", href: "/visitor-gym-access" },
+    {
+      label: "Airport Layover Gym Access",
+      href: "/airport-layover-gym-access",
+    },
   ];
 
   return (

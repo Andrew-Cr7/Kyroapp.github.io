@@ -14,6 +14,13 @@ import {
   GymDayPassesUk,
   HowToFindAGymWhileTravelling,
 } from "./pages/SeoContentPages";
+import {
+  AirportLayoverGymAccess,
+  BusinessTravelGymAccess,
+  FitnessWhileTravellingGuide,
+  GymAccessForDigitalNomads,
+  VisitorGymAccess,
+} from "./pages/SeoBatchPages";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +46,23 @@ const App = () => (
             <Route
               path="/can-tourists-use-gyms-in-london"
               element={<CanTouristsUseGymsInLondon />}
+            />
+            <Route
+              path="/fitness-while-travelling-guide"
+              element={<FitnessWhileTravellingGuide />}
+            />
+            <Route
+              path="/gym-access-for-digital-nomads"
+              element={<GymAccessForDigitalNomads />}
+            />
+            <Route
+              path="/business-travel-gym-access"
+              element={<BusinessTravelGymAccess />}
+            />
+            <Route path="/visitor-gym-access" element={<VisitorGymAccess />} />
+            <Route
+              path="/airport-layover-gym-access"
+              element={<AirportLayoverGymAccess />}
             />
 
             <Route path="/for-gyms" element={<ForGyms />} />
