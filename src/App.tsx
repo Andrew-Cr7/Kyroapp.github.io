@@ -9,6 +9,11 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LondonGymDayPasses from "./pages/LondonGymDayPasses";
 import ForGyms from "./pages/ForGyms";
+import {
+  CanTouristsUseGymsInLondon,
+  GymDayPassesUk,
+  HowToFindAGymWhileTravelling,
+} from "./pages/SeoContentPages";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +30,15 @@ const App = () => (
             <Route
               path="/london-gym-day-passes"
               element={<LondonGymDayPasses />}
+            />
+            <Route path="/gym-day-passes-uk" element={<GymDayPassesUk />} />
+            <Route
+              path="/how-to-find-a-gym-while-travelling"
+              element={<HowToFindAGymWhileTravelling />}
+            />
+            <Route
+              path="/can-tourists-use-gyms-in-london"
+              element={<CanTouristsUseGymsInLondon />}
             />
 
             <Route path="/for-gyms" element={<ForGyms />} />

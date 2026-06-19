@@ -295,6 +295,21 @@ const LondonGymDayPasses = () => {
                   <a href="#checklist" className="block hover:text-primary">
                     What to check before buying a day pass
                   </a>
+                  <a href="/gym-day-passes-uk" className="block hover:text-primary">
+                    UK gym day passes guide
+                  </a>
+                  <a
+                    href="/can-tourists-use-gyms-in-london"
+                    className="block hover:text-primary"
+                  >
+                    Tourist gym access in London
+                  </a>
+                  <a
+                    href="/how-to-find-a-gym-while-travelling"
+                    className="block hover:text-primary"
+                  >
+                    How to find a gym while travelling
+                  </a>
                 </div>
               </div>
             </div>
@@ -616,6 +631,24 @@ const LondonGymDayPasses = () => {
               <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-primary-foreground/75">
                 <a href="/" className="hover:text-primary-foreground">
                   Kyro homepage
+                </a>
+                <a
+                  href="/gym-day-passes-uk"
+                  className="hover:text-primary-foreground"
+                >
+                  UK gym day passes
+                </a>
+                <a
+                  href="/can-tourists-use-gyms-in-london"
+                  className="hover:text-primary-foreground"
+                >
+                  Tourist gyms in London
+                </a>
+                <a
+                  href="/how-to-find-a-gym-while-travelling"
+                  className="hover:text-primary-foreground"
+                >
+                  Find gyms while travelling
                 </a>
                 <a href="/for-gyms" className="hover:text-primary-foreground">
                   For London gyms

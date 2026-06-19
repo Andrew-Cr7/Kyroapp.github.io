@@ -7,6 +7,15 @@ const Footer = () => {
     { label: "Home", href: "/" },
     { label: "For Gyms", href: "/for-gyms" },
     { label: "London Gym Day Passes", href: "/london-gym-day-passes" },
+    { label: "UK Gym Day Passes", href: "/gym-day-passes-uk" },
+    {
+      label: "Find a Gym While Travelling",
+      href: "/how-to-find-a-gym-while-travelling",
+    },
+    {
+      label: "Tourist Gyms in London",
+      href: "/can-tourists-use-gyms-in-london",
+    },
   ];
 
   return (
