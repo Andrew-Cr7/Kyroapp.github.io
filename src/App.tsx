@@ -21,6 +21,13 @@ import {
   GymAccessForDigitalNomads,
   VisitorGymAccess,
 } from "./pages/SeoBatchPages";
+import {
+  CanUseGymWithoutMembership,
+  FindingAGymInANewCity,
+  FlexibleGymPassesForTravellers,
+  GymDayPassesExplained,
+  HowToFindGymsWithDayPasses,
+} from "./pages/SeoEvergreenPages";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +70,26 @@ const App = () => (
             <Route
               path="/airport-layover-gym-access"
               element={<AirportLayoverGymAccess />}
+            />
+            <Route
+              path="/can-you-use-a-gym-without-a-membership"
+              element={<CanUseGymWithoutMembership />}
+            />
+            <Route
+              path="/gym-day-passes-explained"
+              element={<GymDayPassesExplained />}
+            />
+            <Route
+              path="/how-to-find-gyms-with-day-passes"
+              element={<HowToFindGymsWithDayPasses />}
+            />
+            <Route
+              path="/flexible-gym-passes-for-travellers"
+              element={<FlexibleGymPassesForTravellers />}
+            />
+            <Route
+              path="/finding-a-gym-in-a-new-city"
+              element={<FindingAGymInANewCity />}
             />
 
             <Route path="/for-gyms" element={<ForGyms />} />

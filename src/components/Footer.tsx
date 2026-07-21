@@ -33,6 +33,26 @@ const Footer = () => {
       label: "Airport Layover Gym Access",
       href: "/airport-layover-gym-access",
     },
+    {
+      label: "Use a Gym Without Membership",
+      href: "/can-you-use-a-gym-without-a-membership",
+    },
+    {
+      label: "Gym Day Passes Explained",
+      href: "/gym-day-passes-explained",
+    },
+    {
+      label: "Find Gyms With Day Passes",
+      href: "/how-to-find-gyms-with-day-passes",
+    },
+    {
+      label: "Flexible Gym Passes",
+      href: "/flexible-gym-passes-for-travellers",
+    },
+    {
+      label: "Finding a Gym in a New City",
+      href: "/finding-a-gym-in-a-new-city",
+    },
   ];
 
   return (

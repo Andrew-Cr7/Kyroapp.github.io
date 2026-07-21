@@ -176,7 +176,7 @@ const pages: Record<string, SeoGuideData> = {
         eyebrow: "What to check",
         title: "Use a practical gym access checklist",
         paragraphs: [
-          "A useful travel gym checklist is not about ranking every facility like a reviewer. It is about reducing surprises. You want to know whether the gym lets visitors in, whether the pass is available on the day you need it, whether the equipment matches your session and whether the practical details support the rest of your trip.",
+          "A useful travel gym checklist is not about reviewing every facility in the city. It is about reducing surprises. You want to know whether the gym lets visitors in, whether the pass is available on the day you need it, whether the equipment matches your session and whether the practical details support the rest of your trip.",
           "Do this before leaving your accommodation. If you need a proper strength session, check racks, platforms and dumbbell range. If you need a quick reset between meetings, check showers, lockers and towel rules. If you have luggage, find out whether storage is possible. If you are travelling on a weekend or public holiday, confirm opening hours for that exact date.",
         ],
         checklist: [
@@ -304,7 +304,7 @@ const pages: Record<string, SeoGuideData> = {
         eyebrow: "Short-term access",
         title: "Look beyond annual memberships and free trials",
         paragraphs: [
-          "Many gyms are designed to convert local residents into members. That can create friction for nomads who need something more flexible. A free trial may only work once. A monthly membership may require notice periods, joining fees or local bank details. A day pass may be useful for testing a gym but expensive if you need it five times a week.",
+          "Many gyms are set up for local residents who want memberships. That can create friction for nomads who need something more flexible. A free trial may only work once. A monthly membership may require notice periods, joining fees or local bank details. A day pass may be useful for testing a gym but expensive if you need it five times a week.",
           "The sweet spot is transparent short-term access. That might mean day passes, weekly options, flexible passes or visitor-friendly terms that let you train while you decide where your routine fits. Kyro's first commercial focus is day passes, and the long-term vision includes broader flexible access as the marketplace develops.",
           "Until Kyro launches, ask direct questions before committing: Can I train for a short stay? Is there a joining fee? How does cancellation work? Can visitors use peak hours? Do I need a local phone number? Clear answers are a sign that the gym understands temporary users.",
         ],
@@ -364,7 +364,7 @@ const pages: Record<string, SeoGuideData> = {
         paragraphs: [
           "Kyro's audience includes people who move often and care about training enough to pay for convenience. Digital nomads are a natural fit because they repeatedly face the same problem in new places. Each city creates a new access search, and every unclear gym policy costs time.",
           "Kyro is currently pre-launch and preparing to launch in London first. The long-term goal is to make flexible gym access easier across cities so nomads can spend less time researching and more time building a routine. The platform is not a coaching app or a membership replacement. It is focused on the access layer that makes training possible.",
-          "If you work remotely and train regularly, join the waitlist. Early demand from nomads helps Kyro understand where flexible gym access is most needed after London.",
+          "If you work remotely and train regularly, join the waitlist for updates as Kyro prepares flexible gym access for people who move between cities.",
         ],
       },
     ],
@@ -606,7 +606,7 @@ const pages: Record<string, SeoGuideData> = {
         title: "Visitor access is not only for tourists",
         paragraphs: [
           "Tourists are the obvious audience because they are away from home and often need one or two sessions. But visitor gym access also matters for digital nomads, business travellers, people visiting friends, students between cities, flexible local users and anyone testing a gym before joining.",
-          "The shared need is flexibility. These users are not always ready for a membership, and many would never buy one in that location. They still value training enough to pay for a good session. That makes visitor access useful for users and commercially useful for gyms with capacity to serve them.",
+          "The shared need is flexibility. These users are not always ready for a membership, and many would never buy one in that location. They still value training enough to pay for a good session. That makes visitor access useful for travellers and useful for gyms that have capacity to welcome them.",
           "Kyro's long-term value sits here: connecting people who need temporary access with gyms that can serve them. The early product focus is pre-launch and London-first, but the access problem exists wherever travellers and gyms meet.",
         ],
       },
