@@ -28,6 +28,11 @@ import {
   GymDayPassesExplained,
   HowToFindGymsWithDayPasses,
 } from "./pages/SeoEvergreenPages";
+import {
+  HowToStayFitWhileTravelling,
+  ShortTermGymMembershipAlternatives,
+  TouristGymPass,
+} from "./pages/SeoNextPages";
 
 const queryClient = new QueryClient();
 
@@ -90,6 +95,15 @@ const App = () => (
             <Route
               path="/finding-a-gym-in-a-new-city"
               element={<FindingAGymInANewCity />}
+            />
+            <Route
+              path="/short-term-gym-membership-alternatives"
+              element={<ShortTermGymMembershipAlternatives />}
+            />
+            <Route path="/tourist-gym-pass" element={<TouristGymPass />} />
+            <Route
+              path="/how-to-stay-fit-while-travelling"
+              element={<HowToStayFitWhileTravelling />}
             />
 
             <Route path="/for-gyms" element={<ForGyms />} />

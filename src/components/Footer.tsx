@@ -53,6 +53,15 @@ const Footer = () => {
       label: "Finding a Gym in a New City",
       href: "/finding-a-gym-in-a-new-city",
     },
+    {
+      label: "Short-Term Gym Alternatives",
+      href: "/short-term-gym-membership-alternatives",
+    },
+    { label: "Tourist Gym Pass", href: "/tourist-gym-pass" },
+    {
+      label: "Stay Fit While Travelling",
+      href: "/how-to-stay-fit-while-travelling",
+    },
   ];
 
   return (

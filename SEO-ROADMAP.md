@@ -36,6 +36,9 @@ These pages already exist and must not be duplicated.
 | How to Find Gyms With Day Passes | `/how-to-find-gyms-with-day-passes` | Gym discovery guide | Published | Included in Finding Gyms cluster |
 | Flexible Gym Passes for Travellers | `/flexible-gym-passes-for-travellers` | Flexible access guide | Published | Included in Gym Day Passes cluster |
 | Finding a Gym in a New City | `/finding-a-gym-in-a-new-city` | Gym discovery guide | Published | Included in Finding Gyms cluster |
+| Short-Term Gym Membership Alternatives | `/short-term-gym-membership-alternatives` | Membership alternative guide | Published | Included in Membership Alternatives cluster |
+| Tourist Gym Pass Guide | `/tourist-gym-pass` | Tourist access guide | Published | Included in Tourist Gym Questions cluster |
+| How to Stay Fit While Travelling | `/how-to-stay-fit-while-travelling` | Travel fitness guide | Published | Included in Travelling Fitness cluster |
 
 Current in-progress pages: none.
 
@@ -124,7 +127,7 @@ Every article is scored out of 100.
 | Working title | Target keyword | Search intent | User problem being solved | Funnel stage | Commercial value | Difficulty | Internal linking opportunities | Priority | Status |
 |---|---|---|---|---|---|---|---|---|---|
 | Fitness While Travelling Guide | fitness while travelling | Broad guide | Wants to stay consistent on the road | TOFU | High | High | All clusters | P1 | Published |
-| How to Stay Fit While Travelling | how to stay fit while travelling | Practical guide | Wants a realistic travel routine | TOFU | High | High | Fitness pillar, finding gyms | P1 | Planned |
+| How to Stay Fit While Travelling | how to stay fit while travelling | Practical guide | Wants a realistic travel routine | TOFU | High | High | Fitness pillar, finding gyms | P1 | Published |
 | Staying Consistent With Fitness While Travelling | fitness consistency while travelling | Routine guidance | Keeps losing routine during trips | TOFU | Medium | Medium | Digital nomads, business travel | P2 | Planned |
 | Travel Fitness Without a Hotel Gym | travel fitness without hotel gym | Find alternatives | Hotel gym is missing or limited | MOFU | Medium | Low | Hotel gym alternatives, visitor access | P2 | Planned |
 | How to Plan Gym Sessions Around Travel Days | gym on travel day | Plan timing | Wants to train despite flights or trains | TOFU | Medium | Low | Airport layover, business travel | P3 | Planned |
@@ -186,7 +189,7 @@ Every article is scored out of 100.
 | Visitor Gym Access | visitor gym access | Understand visitor rules | Wants to know if gyms allow visitors | BOFU | High | Medium | Tourist gym pass, London, no membership | P1 | Published |
 | Can Tourists Use Gyms in London? | can tourists use gyms in London | London tourist access | Wants London-specific answer | BOFU | High | Low | London passes, visitor access | P1 | Published |
 | Can Tourists Use Gyms? | can tourists use gyms | Broad answer | Wants to know if tourists can train | MOFU | High | Low | Visitor access, country pages | P1 | Planned |
-| Tourist Gym Pass Guide | tourist gym pass | Find tourist passes | Wants access during a trip | BOFU | High | Medium | Day passes, visitor access | P1 | Planned |
+| Tourist Gym Pass Guide | tourist gym pass | Find tourist passes | Wants access during a trip | BOFU | High | Medium | Day passes, visitor access | P1 | Published |
 | Do Gyms Let Visitors Train? | do gyms let visitors train | Visitor question | Unsure about non-member access | MOFU | High | Low | Visitor access, no membership | P1 | Planned |
 | Can You Use a Gym Abroad as a Tourist? | use gym abroad as tourist | International question | Wants to train overseas | MOFU | High | Low | International culture, finding gyms | P1 | Planned |
 | What ID Do Tourists Need for Gyms? | gym ID requirements tourists | Practical requirement | Does not know documents needed | MOFU | Medium | Low | Visitor access, country guides | P3 | Planned |
@@ -200,7 +203,7 @@ Every article is scored out of 100.
 |---|---|---|---|---|---|---|---|---|---|
 | Can You Use a Gym Without a Membership? | use gym without membership | Solve access question | Wants gym access without joining | BOFU | High | Medium | Visitor access, day passes | P1 | Published |
 | Gym Day Pass vs Short-Term Membership | gym day pass vs short term membership | Compare options | Wants best flexible option | MOFU | High | Medium | Day pass explainer, no membership | P1 | Planned |
-| Short-Term Gym Membership Alternatives | short term gym membership alternatives | Find alternatives | Wants access without contract | BOFU | High | Medium | Digital nomads, day passes | P1 | Planned |
+| Short-Term Gym Membership Alternatives | short term gym membership alternatives | Find alternatives | Wants access without contract | BOFU | High | Medium | Digital nomads, day passes | P1 | Published |
 | No Contract Gym Access | no contract gym access | Find flexible access | Wants no commitment | BOFU | High | High | Day passes, pay as you go | P1 | Planned |
 | Pay-As-You-Go Gym Access | pay as you go gym access | Find PAYG access | Wants occasional gym use | BOFU | High | Medium | Day pass explainer | P2 | Planned |
 | Gym Access Without Joining Fee | gym without joining fee | Avoid fees | Wants one-off access | BOFU | Medium | Medium | No membership, day passes | P2 | Planned |
@@ -253,11 +256,11 @@ Scores are sorted from highest to lowest opportunity. Factor scores are abbrevia
 | 6 | 94 | 13 | 20 | 15 | 15 | 7 | 9 | 15 | Published | `/how-to-find-gyms-with-day-passes` | How to Find Gyms With Day Passes | Finding Gyms |
 | 7 | 93 | 13 | 20 | 15 | 14 | 7 | 9 | 15 | Published | `/flexible-gym-passes-for-travellers` | Flexible Gym Passes for Travellers | Gym Day Passes |
 | 8 | 92 | 13 | 20 | 14 | 15 | 7 | 9 | 14 | Published | `/finding-a-gym-in-a-new-city` | Finding a Gym in a New City | Finding Gyms |
-| 9 | 92 | 13 | 20 | 14 | 15 | 7 | 9 | 14 | Planned | `/short-term-gym-membership-alternatives` | Short-Term Gym Membership Alternatives | Membership Alternatives |
-| 10 | 91 | 13 | 20 | 14 | 14 | 7 | 9 | 14 | Planned | `/tourist-gym-pass` | Tourist Gym Pass Guide | Tourist Gym Questions |
+| 9 | 92 | 13 | 20 | 14 | 15 | 7 | 9 | 14 | Published | `/short-term-gym-membership-alternatives` | Short-Term Gym Membership Alternatives | Membership Alternatives |
+| 10 | 91 | 13 | 20 | 14 | 14 | 7 | 9 | 14 | Published | `/tourist-gym-pass` | Tourist Gym Pass Guide | Tourist Gym Questions |
 | 11 | 91 | 12 | 20 | 15 | 14 | 7 | 9 | 14 | Published | `/gym-access-for-digital-nomads` | Gym Access for Digital Nomads | Digital Nomad Fitness |
 | 12 | 90 | 12 | 20 | 15 | 14 | 7 | 8 | 14 | Published | `/business-travel-gym-access` | Business Travel Gym Access | Business Traveller Fitness |
-| 13 | 90 | 13 | 20 | 14 | 14 | 7 | 8 | 14 | Planned | `/how-to-stay-fit-while-travelling` | How to Stay Fit While Travelling | Travelling Fitness |
+| 13 | 90 | 13 | 20 | 14 | 14 | 7 | 8 | 14 | Published | `/how-to-stay-fit-while-travelling` | How to Stay Fit While Travelling | Travelling Fitness |
 | 14 | 89 | 12 | 20 | 14 | 14 | 7 | 8 | 14 | Planned | `/gym-access-without-a-local-phone-number` | Gym Access Without a Local Phone Number | Finding Gyms |
 | 15 | 89 | 12 | 20 | 14 | 14 | 7 | 8 | 14 | Planned | `/can-tourists-use-gyms` | Can Tourists Use Gyms? | Tourist Gym Questions |
 | 16 | 88 | 12 | 20 | 14 | 14 | 6 | 8 | 14 | Planned | `/gym-day-pass-vs-short-term-membership` | Gym Day Pass vs Short-Term Membership | Membership Alternatives |
@@ -359,16 +362,16 @@ When asked to create the next SEO pages:
 
 ## Current Highest-Priority Planned Pages
 
-1. `/short-term-gym-membership-alternatives`
-2. `/tourist-gym-pass`
-3. `/how-to-stay-fit-while-travelling`
-4. `/gym-access-without-a-local-phone-number`
-5. `/can-tourists-use-gyms`
-6. `/gym-day-pass-vs-short-term-membership`
-7. `/hotel-gym-alternatives`
-8. `/can-you-use-a-gym-abroad-as-a-tourist`
-9. `/how-to-choose-a-gym-while-abroad`
-10. `/no-contract-gym-access`
+1. `/gym-access-without-a-local-phone-number`
+2. `/can-tourists-use-gyms`
+3. `/gym-day-pass-vs-short-term-membership`
+4. `/hotel-gym-alternatives`
+5. `/can-you-use-a-gym-abroad-as-a-tourist`
+6. `/how-to-choose-a-gym-while-abroad`
+7. `/no-contract-gym-access`
+8. `/best-gym-access-options-for-business-travellers`
+9. `/what-to-do-when-a-hotel-has-no-gym`
+10. `/gym-day-passes-for-work-trips`
 
 ## Technical Implementation Checklist
 
