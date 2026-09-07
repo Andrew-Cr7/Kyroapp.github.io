@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LondonGymDayPasses from "./pages/LondonGymDayPasses";
 import ForGyms from "./pages/ForGyms";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import {
   CanTouristsUseGymsInLondon,
   GymDayPassesUk,
@@ -107,6 +108,7 @@ const App = () => (
             />
 
             <Route path="/for-gyms" element={<ForGyms />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
