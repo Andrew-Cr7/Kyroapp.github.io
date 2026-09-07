@@ -1,38 +1,337 @@
 import WaitlistForm from "./WaitlistForm";
 import heroGym from "@/assets/hero-gym.jpg";
-import { Check, Globe2, MapPin, SlidersHorizontal, Users, Zap } from "lucide-react";
+import {
+  Bell,
+  Bookmark,
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Clock3,
+  Compass,
+  Dumbbell,
+  Globe2,
+  Heart,
+  Map,
+  MapPin,
+  RotateCcw,
+  Search,
+  SlidersHorizontal,
+  Ticket,
+  UserRound,
+  Users,
+  Zap,
+} from "lucide-react";
+
+const Toggle = ({ on = true }: { on?: boolean }) => (
+  <span
+    className={`relative inline-flex h-[18px] w-[34px] shrink-0 rounded-full border transition-colors ${
+      on ? "border-primary bg-primary" : "border-[#d7dcda] bg-[#edf0ef]"
+    }`}
+    aria-hidden="true"
+  >
+    <span
+      className={`absolute top-[2px] h-3 w-3 rounded-full bg-white shadow-sm transition-transform ${
+        on ? "translate-x-[17px]" : "translate-x-[2px]"
+      }`}
+    />
+  </span>
+);
+
+const AmenityChip = ({ children }: { children: React.ReactNode }) => (
+  <span className="rounded-md bg-[#edf4ef] px-2 py-1 text-[7px] font-medium text-[#486250]">
+    {children}
+  </span>
+);
+
+const MiniNav = () => (
+  <div className="mt-auto grid grid-cols-5 border-t border-[#e1e5e2] bg-white px-2 py-2 text-[#50625a]">
+    {[
+      { Icon: Compass, label: "Discover" },
+      { Icon: Map, label: "Map View" },
+      { Icon: Ticket, label: "My Passes" },
+      { Icon: Bookmark, label: "Saved" },
+      { Icon: UserRound, label: "Profile" },
+    ].map(({ Icon, label }, index) => (
+      <div key={label} className={`flex flex-col items-center gap-1 ${index === 0 ? "text-primary" : ""}`}>
+        <Icon className="h-3.5 w-3.5" strokeWidth={1.8} />
+        <span className="text-[5.5px] font-medium">{label}</span>
+      </div>
+    ))}
+  </div>
+);
+
+const PhoneFrame = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div
+    className={`relative overflow-hidden rounded-[38px] border-[7px] border-[#111714] bg-[#f8faf9] shadow-[0_28px_65px_rgba(24,37,28,0.18)] ${className}`}
+  >
+    <div className="pointer-events-none absolute left-1/2 top-[8px] z-50 h-[12px] w-[58px] -translate-x-1/2 rounded-full bg-[#111714]" />
+    {children}
+  </div>
+);
+
+const DiscoverPhone = () => (
+  <PhoneFrame className="flex h-[560px] w-[252px] flex-col">
+    <div className="flex-1 overflow-hidden px-3 pb-2 pt-7">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary font-display text-[11px] font-bold text-white">
+            K
+          </span>
+          <div>
+            <p className="text-[6px] text-[#66756e]">Current Location</p>
+            <p className="flex items-center gap-1 text-[8px] font-semibold text-[#17251d]">
+              London, UK <ChevronDown className="h-2.5 w-2.5" />
+            </p>
+          </div>
+        </div>
+        <Bell className="h-4 w-4 text-[#26352d]" strokeWidth={1.8} />
+      </div>
+
+      <div className="mt-3 flex items-center gap-2 rounded-lg border border-[#dfe4e1] bg-white px-2.5 py-2">
+        <Search className="h-3.5 w-3.5 text-[#60736a]" strokeWidth={2} />
+        <span className="flex-1 text-[6.5px] text-[#78867f]">Search gyms, cities or amenities...</span>
+        <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#dff3e4] text-primary">
+          <SlidersHorizontal className="h-3 w-3" />
+        </span>
+      </div>
+
+      <div className="mt-2 flex gap-1.5 overflow-hidden whitespace-nowrap">
+        <span className="rounded-full bg-primary px-2.5 py-1.5 text-[6px] font-semibold text-white">All</span>
+        <span className="rounded-full border border-[#d8dfdb] bg-white px-2.5 py-1.5 text-[6px]">Open Now</span>
+        <span className="rounded-full border border-[#d8dfdb] bg-white px-2.5 py-1.5 text-[6px]">Day Pass</span>
+        <span className="rounded-full border border-[#d8dfdb] bg-white px-2.5 py-1.5 text-[6px]">Week Pass</span>
+      </div>
+
+      <div className="mt-3 rounded-lg bg-[#173429] p-3 text-white shadow-sm">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5">
+            <span className="rounded bg-[#cbeed3] px-2 py-1 text-[5.5px] font-bold uppercase tracking-wide text-[#183528]">
+              Active Pass
+            </span>
+            <span className="text-[5.5px] text-white/65">Expires in 4 hours</span>
+          </div>
+          <button className="rounded-md bg-[#d4f3dc] px-2 py-1.5 text-[5.5px] font-semibold text-[#173429]">
+            Show Pass
+          </button>
+        </div>
+        <p className="mt-2 font-display text-[10px] font-semibold">Riverside Athletic Club</p>
+        <p className="mt-1 text-[6px] text-white/65">Full Club, Tier X & Spa Access</p>
+      </div>
+
+      <div className="mb-2 mt-4 flex items-end justify-between">
+        <h3 className="font-display text-[13px] font-bold text-[#17251d]">Top Gyms Nearby</h3>
+        <span className="text-[6px] font-medium text-[#44664f]">See All (24)</span>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-[#d8dfdb] bg-white">
+        <div className="relative h-[112px] overflow-hidden">
+          <img src={heroGym} alt="Illustrative Riverside Athletic Club interior" className="h-full w-full object-cover" />
+          <span className="absolute left-2 top-2 rounded-full bg-[#173429]/95 px-2 py-1 text-[6px] font-medium text-white">★ 4.8 (124)</span>
+          <span className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-lg bg-white text-primary shadow-sm">
+            <Heart className="h-3.5 w-3.5" />
+          </span>
+          <span className="absolute bottom-2 left-2 rounded bg-[#173429]/95 px-2 py-1 text-[6px] text-white">0.8 miles away · London</span>
+        </div>
+        <div className="p-2.5">
+          <div className="flex items-start justify-between gap-2">
+            <p className="font-display text-[10px] font-semibold text-[#17251d]">Riverside Athletic Club</p>
+            <p className="whitespace-nowrap text-[9px] font-bold text-[#17251d]">£20 <span className="text-[6px] font-normal text-[#65756d]">/ day</span></p>
+          </div>
+          <p className="mt-1 text-[6.5px] leading-relaxed text-[#64748b]">Premium gym with extensive facilities.</p>
+          <div className="mt-2 flex gap-1"><AmenityChip>Pool</AmenityChip><AmenityChip>Sauna</AmenityChip><AmenityChip>CrossFit</AmenityChip><AmenityChip>Cafe</AmenityChip></div>
+          <div className="mt-2.5 grid grid-cols-2 gap-1.5">
+            <button className="rounded-md border border-[#ced6d1] py-2 text-[6px] font-semibold text-[#26352d]">View Passes</button>
+            <button className="rounded-md bg-primary py-2 text-[6px] font-semibold text-white">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <MiniNav />
+  </PhoneFrame>
+);
+
+const FilterPhone = () => {
+  const facilities = [
+    { label: "Free weights", on: true },
+    { label: "Cardio equipment", on: true },
+    { label: "CrossFit", on: false },
+    { label: "Boxing", on: false },
+    { label: "Functional training area", on: true },
+  ];
+
+  return (
+    <PhoneFrame className="flex h-[635px] w-[300px] flex-col">
+      <div className="flex-1 overflow-hidden px-3 pb-3 pt-7">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary font-display text-[11px] font-bold text-white">K</span>
+            <span className="font-display text-[10px] font-bold text-[#17251d]">KYRO</span>
+          </div>
+          <span className="font-display text-[13px] font-semibold text-[#17251d]">Discover</span>
+          <div className="flex items-center gap-2"><Bell className="h-3.5 w-3.5" /><span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white"><UserRound className="h-3 w-3" /></span></div>
+        </div>
+
+        <div className="mt-3 flex items-center gap-2 rounded-md bg-[#f0f3f1] px-2.5 py-2 text-[6.5px] text-[#33463c]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#3f8c5b]" />
+          Discovering in London, 24 venues found
+        </div>
+
+        <div className="mt-3 rounded-xl border border-[#edf0ee] bg-white p-3 shadow-[0_3px_12px_rgba(20,40,30,0.05)]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <h3 className="font-display text-[15px] font-bold text-[#17251d]">Filter Gyms</h3>
+              <span className="rounded-full bg-[#d5f0dc] px-2 py-1 text-[6px] font-medium text-[#2f6b46]">7 active</span>
+            </div>
+            <button className="flex items-center gap-1 text-[6px] text-[#33463c]"><RotateCcw className="h-2.5 w-2.5" /> Reset</button>
+          </div>
+
+          <div className="mt-3 flex items-center justify-between rounded-lg bg-[#f6f8f7] p-2.5">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#d5f0dc] text-[#2f6b46]"><Clock3 className="h-3.5 w-3.5" /></span>
+              <div><p className="text-[8px] font-medium text-[#17251d]">Open now</p><p className="mt-0.5 max-w-[120px] text-[5.5px] leading-tight text-[#728078]">Venues welcoming guests right now</p></div>
+            </div>
+            <Toggle on />
+          </div>
+
+          <p className="mb-2 mt-4 text-[7px] font-medium text-[#25372e]">Pass Type</p>
+          <div className="grid grid-cols-4 gap-1.5">
+            {["All Access", "Day Pass", "Week Pass", "Month Pass"].map((item, index) => (
+              <span key={item} className={`flex min-h-[40px] items-center justify-center rounded-lg px-1 text-center text-[6px] leading-tight ${index === 0 ? "bg-primary font-semibold text-white" : "bg-[#f4f6f5] text-[#25372e]"}`}>
+                {item}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-4 flex items-center justify-between text-[7px]"><span className="font-medium text-[#25372e]">Price Range</span><span className="font-medium text-[#2f6b46]">£15 – £60 / day</span></div>
+          <div className="mt-2 flex h-11 items-end gap-1">
+            {[10, 13, 20, 29, 34, 30, 25, 18, 11].map((height, index) => (
+              <span key={index} className={`flex-1 rounded-t-[2px] ${index >= 2 && index <= 6 ? "bg-[#527864]" : "bg-[#e8ece9]"}`} style={{ height }} />
+            ))}
+          </div>
+          <div className="relative mt-2 h-[3px] rounded-full bg-[#dde3df]">
+            <div className="absolute left-0 top-0 h-[3px] w-[48%] rounded-full bg-primary" />
+            <div className="absolute left-[47%] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-primary" />
+          </div>
+          <div className="mt-2 flex justify-between text-[5.5px] text-[#7d8a83]"><span>£10</span><span>Avg. £35</span><span>£120+</span></div>
+
+          <div className="mt-4 border-t border-[#e4e9e6] pt-3">
+            <div className="mb-2.5 flex items-center justify-between">
+              <div className="flex items-center gap-2"><SlidersHorizontal className="h-3 w-3" /><span className="text-[8px] font-semibold text-[#17251d]">Facilities</span><span className="rounded-full bg-[#edf0ef] px-1.5 py-0.5 text-[5.5px] text-[#65756d]">3 active</span></div>
+              <ChevronDown className="h-3 w-3 text-[#53675d]" />
+            </div>
+            <div className="space-y-2.5">
+              {facilities.map(({ label, on }) => (
+                <div key={label} className="flex items-center justify-between">
+                  <span className="flex items-center gap-2 text-[6.5px] text-[#4b5e54]"><Dumbbell className="h-2.5 w-2.5" strokeWidth={1.7} />{label}</span>
+                  <Toggle on={on} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-3 pb-3">
+        <button className="flex w-full items-center justify-between rounded-lg bg-primary px-3 py-2.5 text-white shadow-sm">
+          <span className="flex items-center gap-2 text-[7px] font-semibold"><SlidersHorizontal className="h-3 w-3" /> Show 24 Gyms</span>
+          <span className="rounded-full bg-white/10 px-2 py-1 text-[5.5px]">7 active</span>
+        </button>
+      </div>
+    </PhoneFrame>
+  );
+};
+
+const DetailPhone = () => (
+  <PhoneFrame className="flex h-[570px] w-[260px] flex-col">
+    <div className="flex-1 overflow-hidden pt-5">
+      <div className="relative h-[190px] overflow-hidden">
+        <img src={heroGym} alt="Illustrative Riverside Athletic Club interior" className="h-full w-full object-cover" />
+        <span className="absolute left-3 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#173429]/90 text-white"><ChevronLeft className="h-4 w-4" /></span>
+        <span className="absolute right-3 top-4 flex h-8 w-8 items-center justify-center rounded-lg bg-white text-primary shadow-sm"><Heart className="h-4 w-4" /></span>
+        <span className="absolute bottom-3 left-3 rounded bg-[#173429]/95 px-2 py-1 text-[6.5px] text-white">0.8 mi · London</span>
+      </div>
+
+      <div className="bg-white px-3 pb-4 pt-3">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="max-w-[150px] font-display text-[13px] font-bold leading-tight text-[#17251d]">Riverside Athletic Club</h3>
+          <p className="whitespace-nowrap text-[10px] font-bold text-[#17251d]">£20 <span className="text-[6px] font-normal text-[#66756e]">/ day</span></p>
+        </div>
+        <p className="mt-2 text-[6.5px] leading-relaxed text-[#64748b]">Premium gym with extensive facilities.</p>
+        <div className="mt-3 flex gap-1"><AmenityChip>Pool</AmenityChip><AmenityChip>Sauna</AmenityChip><AmenityChip>CrossFit</AmenityChip><AmenityChip>Cafe</AmenityChip></div>
+        <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 text-[7px] font-semibold text-white">Book Pass <ChevronRight className="h-3 w-3" /></button>
+
+        <div className="mt-4 border-t border-[#e5e9e6] pt-3">
+          <h4 className="text-[8px] font-semibold text-[#17251d]">About</h4>
+          <p className="mt-2 text-[6px] leading-relaxed text-[#66756e]">A modern training facility with world-class equipment, recovery amenities and a welcoming community.</p>
+          <div className="mt-3 space-y-2 text-[6px] text-[#53675d]">
+            <div className="flex items-center gap-2"><Clock3 className="h-3 w-3" /> Open 6am - 10pm</div>
+            <div className="flex items-center gap-2"><MapPin className="h-3 w-3" /> 2.1 miles from your location</div>
+            <div className="flex items-center justify-between"><span className="flex items-center gap-2"><Map className="h-3 w-3" /> Show on map</span><ChevronRight className="h-3 w-3" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </PhoneFrame>
+);
+
+const MobileProductPreview = () => (
+  <PhoneFrame className="mx-auto flex h-[560px] w-[280px] flex-col">
+    <div className="flex-1 overflow-hidden px-3 pb-2 pt-7">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2"><span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary font-display text-xs font-bold text-white">K</span><span className="font-display text-xs font-bold">KYRO</span></div>
+        <span className="font-display text-sm font-semibold">Discover</span>
+        <Bell className="h-4 w-4" />
+      </div>
+      <div className="mt-3 flex items-center gap-2 rounded-lg border border-[#dfe4e1] bg-white px-3 py-2.5"><Search className="h-4 w-4 text-[#60736a]" /><span className="text-[8px] text-[#78867f]">Search gyms, cities or amenities...</span></div>
+      <div className="mt-3 rounded-lg bg-[#173429] p-3 text-white">
+        <div className="flex items-center justify-between"><span className="rounded bg-[#cbeed3] px-2 py-1 text-[6px] font-bold uppercase tracking-wide text-[#183528]">Active Pass</span><span className="text-[6px] text-white/65">Expires in 4 hours</span></div>
+        <div className="mt-2 flex items-center justify-between"><div><p className="font-display text-[11px] font-semibold">Riverside Athletic Club</p><p className="mt-1 text-[6px] text-white/65">Full Club, Tier X & Spa Access</p></div><button className="rounded-md bg-[#d4f3dc] px-2 py-2 text-[6px] font-semibold text-[#173429]">Show Pass</button></div>
+      </div>
+      <h3 className="mb-2 mt-4 font-display text-base font-bold">Top Gyms Nearby</h3>
+      <div className="overflow-hidden rounded-xl border border-[#d8dfdb] bg-white"><img src={heroGym} alt="Illustrative Riverside Athletic Club interior" className="h-40 w-full object-cover" /><div className="p-3"><div className="flex justify-between"><p className="font-display text-sm font-semibold">Riverside Athletic Club</p><p className="text-xs font-bold">£20 <span className="text-[8px] font-normal">/ day</span></p></div><div className="mt-2 flex gap-1"><AmenityChip>Pool</AmenityChip><AmenityChip>Sauna</AmenityChip><AmenityChip>CrossFit</AmenityChip></div><button className="mt-3 w-full rounded-lg bg-primary py-2.5 text-[8px] font-semibold text-white">View Passes</button></div></div>
+    </div>
+    <MiniNav />
+  </PhoneFrame>
+);
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-background pt-24 md:pt-28">
-      <div className="kyro-container">
-        <div className="grid items-center gap-10 py-12 lg:min-h-[680px] lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:py-14">
-          <div className="max-w-[620px]">
-            <div className="mb-7 inline-flex items-center rounded-full bg-secondary/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-              Launching soon in London
+    <section className="relative overflow-hidden bg-background pt-20 lg:pt-24">
+      <div className="mx-auto max-w-[1440px] px-6 sm:px-8 lg:px-12">
+        <div className="grid items-center gap-12 pb-12 pt-14 lg:min-h-[735px] lg:grid-cols-[0.82fr_1.18fr] lg:gap-5 lg:pb-10 lg:pt-8">
+          <div className="max-w-[580px] lg:self-center">
+            <div className="inline-flex items-center rounded-full bg-[#eef1ef] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">
+              Launching globally soon
             </div>
 
-            <h1 className="font-display text-[52px] font-extrabold leading-[0.98] tracking-[-0.035em] text-primary sm:text-[64px] lg:text-[72px]">
+            <h1 className="mt-9 font-display text-[54px] font-extrabold leading-[1.02] tracking-[-0.04em] text-primary sm:text-[66px] xl:text-[78px]">
               Train anywhere.
               <br />
               Train Kyro.
             </h1>
 
-            <p className="mt-7 max-w-[600px] text-[20px] leading-[1.45] text-muted-foreground sm:text-[22px]">
+            <p className="mt-7 max-w-[570px] text-[19px] leading-[1.55] text-[#5f746b] sm:text-[21px] xl:text-[22px]">
               Find gyms. Compare facilities. Buy flexible passes.
               <br className="hidden sm:block" />
               No memberships. No calling around.
             </p>
 
-            <div className="mt-9 max-w-[590px]">
+            <div className="mt-9 w-full max-w-[570px]">
               <WaitlistForm variant="hero" />
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-x-7 gap-y-3 text-sm text-muted-foreground">
-              {["London launching first", "Founding member perks", "No spam"].map((item) => (
-                <span key={item} className="flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full border border-secondary/30 bg-secondary/10">
-                    <Check className="h-3 w-3 text-secondary" />
+            <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-[13px] text-[#60756b]">
+              {["Global launch", "Founding member perks", "No spam"].map((item) => (
+                <span key={item} className="flex items-center gap-2.5">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#61b57a] text-[#3b9b5c]">
+                    <Check className="h-3.5 w-3.5" strokeWidth={2.2} />
                   </span>
                   {item}
                 </span>
@@ -40,156 +339,29 @@ const Hero = () => {
             </div>
           </div>
 
-          <div
-            className="relative mx-auto hidden h-[560px] w-full max-w-[670px] md:block"
-            aria-label="Preview of the Kyro app using illustrative gyms"
-          >
-            <div className="absolute left-[1%] top-[74px] z-10 h-[445px] w-[220px] -rotate-[2deg] overflow-hidden rounded-[2.5rem] border-[7px] border-[#111815] bg-[#f7f9fb] shadow-[0_28px_65px_rgba(24,37,28,0.14)]">
-              <div className="mx-auto mt-3 h-3 w-14 rounded-full bg-[#111815]" />
-              <div className="p-3">
-                <div className="flex items-center justify-between text-[8px] font-semibold text-primary">
-                  <span>KYRO</span>
-                  <span>London, UK</span>
-                </div>
-                <div className="mt-3 rounded-md border border-border bg-white px-2 py-2 text-[7px] text-muted-foreground">
-                  Search gyms, cities or amenities...
-                </div>
-                <div className="mt-2 flex gap-1">
-                  <span className="rounded-full bg-primary px-2 py-1 text-[7px] text-white">All</span>
-                  <span className="rounded-full border border-border bg-white px-2 py-1 text-[7px]">Open Now</span>
-                  <span className="rounded-full border border-border bg-white px-2 py-1 text-[7px]">Day Pass</span>
-                </div>
-                <div className="mt-3 rounded-lg bg-primary-container p-3 text-white">
-                  <span className="rounded bg-secondary-fixed px-2 py-1 text-[7px] font-semibold text-primary">ACTIVE PASS</span>
-                  <p className="mt-2 font-display text-[11px] font-semibold">Riverside Athletic Club</p>
-                  <p className="mt-1 text-[7px] text-white/60">Full Club & Spa Access</p>
-                </div>
-                <div className="mb-2 mt-4 flex items-center justify-between">
-                  <p className="font-display text-[13px] font-bold text-primary">Top Gyms Nearby</p>
-                  <span className="text-[7px] text-secondary">See All</span>
-                </div>
-                <div className="overflow-hidden rounded-lg border border-border bg-white">
-                  <div className="relative h-[104px] overflow-hidden">
-                    <img src={heroGym} alt="Illustrative gym interior" className="h-full w-full object-cover" />
-                    <span className="absolute bottom-2 left-2 rounded bg-primary/90 px-2 py-1 text-[7px] text-white">★ 4.8 · 0.8 mi</span>
-                  </div>
-                  <div className="p-2.5">
-                    <div className="flex items-start justify-between gap-2">
-                      <p className="font-display text-[10px] font-semibold leading-tight">Riverside Athletic Club</p>
-                      <p className="whitespace-nowrap text-[9px] font-bold">£20 <span className="font-normal text-muted-foreground">/ day</span></p>
-                    </div>
-                    <p className="mt-1 text-[7px] text-muted-foreground">Premium gym with flexible access</p>
-                    <div className="mt-2 flex gap-1">
-                      {["Pool", "Sauna", "CrossFit"].map((tag) => (
-                        <span key={tag} className="rounded bg-secondary/10 px-1.5 py-1 text-[6px] text-secondary">{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute left-1/2 top-0 z-30 h-[535px] w-[250px] -translate-x-1/2 overflow-hidden rounded-[2.7rem] border-[7px] border-[#111815] bg-[#f7f9fb] shadow-[0_30px_70px_rgba(24,37,28,0.18)]">
-              <div className="mx-auto mt-3 h-3 w-14 rounded-full bg-[#111815]" />
-              <div className="p-3">
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-[10px] font-bold text-primary">KYRO</span>
-                  <span className="font-display text-[14px] font-semibold">Discover</span>
-                  <span className="text-[9px]">♢</span>
-                </div>
-                <div className="mt-3 rounded-md bg-secondary/5 px-2 py-2 text-[7px] text-primary">● Discovering in London · 24 venues found</div>
-                <div className="mt-3 rounded-xl bg-white p-3 shadow-sm">
-                  <div className="flex items-center justify-between">
-                    <p className="font-display text-[14px] font-bold">Filter Gyms</p>
-                    <span className="rounded-full bg-secondary-fixed px-2 py-1 text-[7px] text-secondary">7 active</span>
-                  </div>
-                  <div className="mt-3 flex items-center justify-between rounded-lg bg-background p-2.5">
-                    <span className="flex items-center gap-2 text-[8px]"><Zap className="h-3.5 w-3.5" /> Open now</span>
-                    <span className="h-4 w-8 rounded-full bg-primary p-0.5"><span className="block h-3 w-3 translate-x-4 rounded-full bg-white" /></span>
-                  </div>
-                  <p className="mb-2 mt-4 text-[8px] font-medium">Pass Type</p>
-                  <div className="grid grid-cols-4 gap-1">
-                    {["All Access", "Day Pass", "Week Pass", "Month Pass"].map((item, index) => (
-                      <span key={item} className={`rounded-md px-1 py-2 text-center text-[7px] leading-tight ${index === 0 ? "bg-primary text-white" : "bg-background"}`}>
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex items-center justify-between text-[8px]"><span>Price Range</span><span className="text-secondary">£15 – £60 / day</span></div>
-                  <div className="mt-2 flex h-12 items-end gap-1">
-                    {[12, 16, 22, 30, 36, 28, 22, 14].map((height, index) => (
-                      <span key={index} className="flex-1 rounded-sm bg-secondary/55" style={{ height }} />
-                    ))}
-                  </div>
-                  <div className="mt-1 h-1 rounded-full bg-border"><div className="ml-[25%] h-1 w-[45%] rounded-full bg-primary" /></div>
-                  <div className="mt-5 space-y-2 border-t border-border pt-3">
-                    <p className="flex items-center gap-2 text-[9px] font-semibold"><SlidersHorizontal className="h-3 w-3" /> Facilities</p>
-                    {["Free weights", "Cardio equipment", "Functional training", "Sauna"].map((item, index) => (
-                      <div key={item} className="flex items-center justify-between text-[8px]">
-                        <span>{item}</span>
-                        <span className={`h-3.5 w-6 rounded-full ${index === 2 ? "bg-border" : "bg-primary"}`} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="absolute bottom-3 left-3 right-3 rounded-md bg-primary py-2.5 text-center text-[9px] font-semibold text-white">Show 24 Gyms</div>
-            </div>
-
-            <div className="absolute right-[1%] top-[78px] z-20 h-[440px] w-[220px] rotate-[2deg] overflow-hidden rounded-[2.5rem] border-[7px] border-[#111815] bg-[#f7f9fb] shadow-[0_28px_65px_rgba(24,37,28,0.14)]">
-              <div className="mx-auto mt-3 h-3 w-14 rounded-full bg-[#111815]" />
-              <div className="p-3">
-                <div className="relative h-[155px] overflow-hidden rounded-lg">
-                  <img src={heroGym} alt="Illustrative gym interior" className="h-full w-full object-cover" />
-                  <span className="absolute bottom-3 left-3 rounded bg-primary/90 px-2 py-1 text-[7px] text-white">0.8 mi · London</span>
-                </div>
-                <div className="pt-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="font-display text-[12px] font-bold leading-tight">Riverside Athletic Club</p>
-                    <p className="whitespace-nowrap text-[10px] font-bold">£20 <span className="text-[7px] font-normal">/ day</span></p>
-                  </div>
-                  <p className="mt-2 text-[7px] leading-relaxed text-muted-foreground">Premium gym with extensive facilities and flexible access.</p>
-                  <div className="mt-3 flex gap-1">
-                    {["Pool", "Sauna", "CrossFit"].map((tag) => (
-                      <span key={tag} className="rounded bg-secondary/10 px-2 py-1 text-[6px]">{tag}</span>
-                    ))}
-                  </div>
-                  <button className="mt-4 w-full rounded-md bg-primary py-2.5 text-[8px] font-semibold text-white">Book Pass →</button>
-                  <div className="mt-4 border-t border-border pt-3">
-                    <p className="text-[8px] font-semibold">About</p>
-                    <p className="mt-2 text-[7px] leading-relaxed text-muted-foreground">A modern training facility with quality equipment, recovery amenities and a welcoming community.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="relative hidden h-[650px] w-full min-w-0 lg:block" aria-label="Kyro app product preview using fictional gyms">
+            <div className="absolute left-[1%] top-[60px] z-10 -rotate-[1.5deg]"><DiscoverPhone /></div>
+            <div className="absolute left-1/2 top-0 z-30 -translate-x-1/2"><FilterPhone /></div>
+            <div className="absolute right-[0%] top-[62px] z-20 rotate-[1.5deg]"><DetailPhone /></div>
           </div>
 
-          <div className="mx-auto w-full max-w-sm md:hidden">
-            <div className="overflow-hidden rounded-[2.4rem] border-[7px] border-[#111815] bg-[#f7f9fb] shadow-[0_24px_55px_rgba(24,37,28,0.15)]">
-              <div className="mx-auto mt-3 h-3 w-14 rounded-full bg-[#111815]" />
-              <div className="p-4">
-                <div className="flex items-center justify-between"><span className="font-display text-xs font-bold text-primary">KYRO</span><span className="font-display text-sm font-semibold">Discover</span><MapPin className="h-3 w-3" /></div>
-                <div className="mt-4 overflow-hidden rounded-xl border border-border bg-white">
-                  <img src={heroGym} alt="Illustrative gym interior" className="h-44 w-full object-cover" />
-                  <div className="p-4"><p className="font-display text-lg font-bold">Riverside Athletic Club</p><p className="mt-1 text-sm text-muted-foreground">Flexible day passes in London</p><button className="mt-4 w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white">View Passes</button></div>
-                </div>
-              </div>
-            </div>
+          <div className="lg:hidden">
+            <MobileProductPreview />
           </div>
         </div>
 
-        <div className="grid gap-6 border-t border-border py-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-7 border-t border-border py-9 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           {[
             { Icon: Globe2, title: "Built for travellers", text: "Train in new cities with ease" },
             { Icon: Zap, title: "Flexible access", text: "Day, week or month passes" },
-            { Icon: MapPin, title: "London first", text: "More cities coming soon" },
+            { Icon: MapPin, title: "Global launch", text: "More cities coming soon" },
             { Icon: Users, title: "A stronger you", text: "Wherever you go" },
           ].map(({ Icon, title, text }) => (
             <div key={title} className="flex items-center gap-4">
-              <Icon className="h-8 w-8 shrink-0 text-primary/65" />
+              <Icon className="h-9 w-9 shrink-0 text-primary/70" strokeWidth={1.7} />
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-primary/80">{title}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{text}</p>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.05em] text-primary/80">{title}</p>
+                <p className="mt-1 text-[13px] text-[#60756b]">{text}</p>
               </div>
             </div>
           ))}
