@@ -24,8 +24,8 @@ const Switch = ({ on = true }: { on?: boolean }) => (
   </span>
 );
 
-const Phone = ({ children, className = "" }: { children: ReactNode; className?: string }) => (
-  <div className={`absolute ${className}`} style={{ transformStyle: "preserve-3d" }}>
+const Phone = ({ children, className = "", ariaLabel }: { children: ReactNode; className?: string; ariaLabel: string }) => (
+  <div className={`absolute ${className}`} style={{ transformStyle: "preserve-3d" }} aria-label={ariaLabel}>
     <div className="absolute -inset-[9px] rounded-[3.25rem] bg-[linear-gradient(135deg,#b7bbb8_0%,#3a413d_14%,#080b09_34%,#121713_65%,#8d948f_86%,#171c19_100%)] shadow-[0_46px_75px_rgba(20,36,27,.24),0_14px_28px_rgba(20,36,27,.16),inset_0_0_0_1px_rgba(255,255,255,.35)]" style={{ transform: "translateZ(-10px)" }} />
     <div className="absolute -inset-[5px] rounded-[3.05rem] bg-[#080b09] ring-1 ring-white/20" />
     <div className="relative h-full w-full overflow-hidden rounded-[2.75rem] bg-[#f7f9fb] ring-[3px] ring-[#101512] shadow-[inset_0_0_0_1px_rgba(255,255,255,.12)]">
@@ -125,19 +125,13 @@ const HeroPremium = () => (
 
         <div className="relative hidden h-[620px] min-w-0 lg:block" style={{ perspective: "1500px" }}>
           <div className="absolute inset-x-[4%] bottom-[8px] h-[82px] rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(20,36,27,.20),rgba(20,36,27,.08)_42%,transparent_72%)] blur-xl" />
-          <Phone className="left-[1%] top-[95px] z-10 h-[520px] w-[270px]" aria-label="Kyro discover screen" >
-            <div style={{ transform: "rotateY(10deg) rotateZ(-1.8deg)", transformOrigin: "50% 80%" }} className="h-full"><DiscoverPhone /></div>
-          </Phone>
-          <Phone className="left-1/2 top-[34px] z-30 h-[590px] w-[300px] -translate-x-1/2" aria-label="Kyro filter screen">
-            <FilterPhone />
-          </Phone>
-          <Phone className="right-[1%] top-[92px] z-20 h-[520px] w-[270px]" aria-label="Kyro gym detail screen">
-            <div style={{ transform: "rotateY(-10deg) rotateZ(1.8deg)", transformOrigin: "50% 80%" }} className="h-full"><DetailPhone /></div>
-          </Phone>
+          <Phone className="left-[1%] top-[95px] z-10 h-[520px] w-[270px] [transform:rotateY(9deg)_rotateZ(-1.8deg)]" ariaLabel="Kyro discover screen"><DiscoverPhone /></Phone>
+          <Phone className="left-1/2 top-[34px] z-30 h-[590px] w-[300px] -translate-x-1/2" ariaLabel="Kyro filter screen"><FilterPhone /></Phone>
+          <Phone className="right-[1%] top-[92px] z-20 h-[520px] w-[270px] [transform:rotateY(-9deg)_rotateZ(1.8deg)]" ariaLabel="Kyro gym detail screen"><DetailPhone /></Phone>
         </div>
 
         <div className="mx-auto block w-full max-w-[360px] lg:hidden">
-          <div className="relative mx-auto h-[540px] w-[276px]"><Phone className="inset-0 h-full w-full" aria-label="Kyro mobile app preview"><DiscoverPhone /></Phone></div>
+          <div className="relative mx-auto h-[540px] w-[276px]"><Phone className="inset-0 h-full w-full" ariaLabel="Kyro mobile app preview"><DiscoverPhone /></Phone></div>
         </div>
       </div>
 
