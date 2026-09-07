@@ -129,7 +129,10 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          © {currentYear} Kyro. All rights reserved.
+          © {currentYear} Kyro. All rights reserved. <span aria-hidden="true">·</span>{" "}
+          <a href="/privacy-policy" className="transition-colors hover:text-primary hover:underline">
+            Privacy Policy
+          </a>
         </div>
       </div>
     </footer>
