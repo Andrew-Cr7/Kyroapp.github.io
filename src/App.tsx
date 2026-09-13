@@ -8,7 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LondonGymDayPasses from "./pages/LondonGymDayPasses";
-import ForGyms from "./pages/ForGyms";
+import ForGyms from "./pages/ForGymsV2";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import {
   CanTouristsUseGymsInLondon,
