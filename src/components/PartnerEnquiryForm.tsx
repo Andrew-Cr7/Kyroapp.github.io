@@ -1,32 +1,23 @@
 import { useState } from "react";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { ArrowRight, Check, Loader2, LockKeyhole } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { trackEvent } from "@/lib/analytics";
 
 type PartnerFormData = {
   gymName: string;
   contactName: string;
   email: string;
-  phone: string;
   city: string;
-  country: string;
-  website: string;
-  message: string;
 };
 
 const initialFormData: PartnerFormData = {
   gymName: "",
   contactName: "",
   email: "",
-  phone: "",
   city: "",
-  country: "",
-  website: "",
-  message: "",
 };
 
 const requiredFields: Array<keyof PartnerFormData> = [
@@ -34,12 +25,9 @@ const requiredFields: Array<keyof PartnerFormData> = [
   "contactName",
   "email",
   "city",
-  "country",
-  "website",
-  "message",
 ];
 
-const labelClassName = "text-sm font-medium leading-none";
+const labelClassName = "text-sm font-semibold text-foreground";
 
 const PartnerEnquiryForm = () => {
   const [formData, setFormData] = useState(initialFormData);
@@ -65,14 +53,14 @@ const PartnerEnquiryForm = () => {
     );
 
     if (missingField) {
-      toast.error("Please complete all required fields.");
+      toast.error("Please complete all four fields.");
       return false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(formData.email.trim())) {
-      toast.error("Please enter a valid email address.");
+      toast.error("Please enter a valid work email address.");
       return false;
     }
 
@@ -91,11 +79,11 @@ const PartnerEnquiryForm = () => {
         gymName: formData.gymName.trim(),
         contactName: formData.contactName.trim(),
         email: formData.email.toLowerCase().trim(),
-        phone: formData.phone.trim(),
         city: formData.city.trim(),
-        country: formData.country.trim(),
-        website: formData.website.trim(),
-        message: formData.message.trim(),
+        phone: "",
+        country: "",
+        website: "",
+        message: "Founding Gym application submitted through the simplified Kyro partner form.",
         landingPage: window.location.pathname,
       };
 
@@ -121,10 +109,10 @@ const PartnerEnquiryForm = () => {
 
       trackEvent("partner_form_submit", {
         city: payload.city,
-        country: payload.country,
+        form_version: "simplified_v2",
       });
 
-      toast.success("Thanks. We will be in touch soon.");
+      toast.success("Application sent. We will be in touch soon.");
       setIsSubmitted(true);
       setFormData(initialFormData);
       setHasStarted(false);
@@ -139,124 +127,68 @@ const PartnerEnquiryForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid gap-5 md:grid-cols-2">
-        <div className="space-y-2">
-          <label className={labelClassName} htmlFor="gym-name">
-            Gym name *
-          </label>
-          <Input
-            id="gym-name"
-            value={formData.gymName}
-            onChange={(event) => updateField("gymName", event.target.value)}
-            onFocus={handleStart}
-            disabled={isSubmitting}
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className={labelClassName} htmlFor="contact-name">
-            Contact name *
-          </label>
-          <Input
-            id="contact-name"
-            value={formData.contactName}
-            onChange={(event) =>
-              updateField("contactName", event.target.value)
-            }
-            onFocus={handleStart}
-            disabled={isSubmitting}
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className={labelClassName} htmlFor="partner-email">
-            Email *
-          </label>
-          <Input
-            id="partner-email"
-            type="email"
-            value={formData.email}
-            onChange={(event) => updateField("email", event.target.value)}
-            onFocus={handleStart}
-            disabled={isSubmitting}
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className={labelClassName} htmlFor="partner-phone">
-            Phone number
-          </label>
-          <Input
-            id="partner-phone"
-            type="tel"
-            value={formData.phone}
-            onChange={(event) => updateField("phone", event.target.value)}
-            onFocus={handleStart}
-            disabled={isSubmitting}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className={labelClassName} htmlFor="partner-city">
-            City *
-          </label>
-          <Input
-            id="partner-city"
-            value={formData.city}
-            onChange={(event) => updateField("city", event.target.value)}
-            onFocus={handleStart}
-            disabled={isSubmitting}
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className={labelClassName} htmlFor="partner-country">
-            Country *
-          </label>
-          <Input
-            id="partner-country"
-            value={formData.country}
-            onChange={(event) => updateField("country", event.target.value)}
-            onFocus={handleStart}
-            disabled={isSubmitting}
-            required
-          />
-        </div>
-      </div>
-
       <div className="space-y-2">
-        <label className={labelClassName} htmlFor="partner-website">
-          Website *
+        <label className={labelClassName} htmlFor="gym-name">
+          Gym name
         </label>
         <Input
-          id="partner-website"
-          type="url"
-          placeholder="https://"
-          value={formData.website}
-          onChange={(event) => updateField("website", event.target.value)}
+          id="gym-name"
+          value={formData.gymName}
+          onChange={(event) => updateField("gymName", event.target.value)}
           onFocus={handleStart}
-          disabled={isSubmitting}
+          disabled={isSubmitting || isSubmitted}
           required
+          placeholder="Your gym"
+          className="h-12 rounded-xl bg-background px-4"
         />
       </div>
 
       <div className="space-y-2">
-        <label className={labelClassName} htmlFor="partner-message">
-          Message *
+        <label className={labelClassName} htmlFor="contact-name">
+          Your name
         </label>
-        <Textarea
-          id="partner-message"
-          value={formData.message}
-          onChange={(event) => updateField("message", event.target.value)}
+        <Input
+          id="contact-name"
+          value={formData.contactName}
+          onChange={(event) => updateField("contactName", event.target.value)}
           onFocus={handleStart}
-          disabled={isSubmitting}
+          disabled={isSubmitting || isSubmitted}
           required
-          className="min-h-32"
-          placeholder="Tell us about your gym and what you would like to explore with Kyro."
+          placeholder="First and last name"
+          className="h-12 rounded-xl bg-background px-4"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <label className={labelClassName} htmlFor="partner-email">
+          Work email
+        </label>
+        <Input
+          id="partner-email"
+          type="email"
+          value={formData.email}
+          onChange={(event) => updateField("email", event.target.value)}
+          onFocus={handleStart}
+          disabled={isSubmitting || isSubmitted}
+          required
+          placeholder="you@yourgym.com"
+          className="h-12 rounded-xl bg-background px-4"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <label className={labelClassName} htmlFor="partner-city">
+          City
+        </label>
+        <Input
+          id="partner-city"
+          value={formData.city}
+          onChange={(event) => updateField("city", event.target.value)}
+          onFocus={handleStart}
+          disabled={isSubmitting || isSubmitted}
+          required
+          placeholder="Your city"
+          className="h-12 rounded-xl bg-background px-4"
         />
       </div>
 
@@ -264,7 +196,7 @@ const PartnerEnquiryForm = () => {
         type="submit"
         variant="hero"
         size="lg"
-        className="w-full sm:w-auto"
+        className="h-14 w-full rounded-xl text-base font-semibold"
         disabled={isSubmitting || isSubmitted}
       >
         {isSubmitting ? (
@@ -272,15 +204,20 @@ const PartnerEnquiryForm = () => {
         ) : isSubmitted ? (
           <>
             <Check className="h-5 w-5" />
-            Sent
+            Application sent
           </>
         ) : (
           <>
-            Request a conversation
+            Apply to join Kyro
             <ArrowRight className="h-5 w-5" />
           </>
         )}
       </Button>
+
+      <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+        <LockKeyhole className="h-3.5 w-3.5" />
+        No setup fees. No commitment to apply.
+      </div>
     </form>
   );
 };
