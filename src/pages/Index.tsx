@@ -6,10 +6,39 @@ import Hero from "@/components/HeroPremium";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import Story from "@/components/Story";
-import FAQ from "@/components/FAQ";
+import FAQ, { faqs } from "@/components/FAQ";
 import WaitlistCTA from "@/components/WaitlistCTA";
 import MobileWaitlistBar from "@/components/MobileWaitlistBar";
 import Footer from "@/components/Footer";
+
+const webApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Kyro",
+  url: "https://kyroapp.co",
+  description:
+    "Kyro is a flexible gym access platform being built for travellers, digital nomads and business travellers who want short-term gym access without long memberships.",
+  applicationCategory: "HealthApplication",
+  operatingSystem: "Web",
+  creator: {
+    "@type": "Organization",
+    name: "Kyro",
+    url: "https://kyroapp.co",
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
 
 const Index = () => {
   useEffect(() => {
@@ -44,7 +73,7 @@ const Index = () => {
         />
         <meta
           property="og:description"
-          content="Access gyms worldwide with flexible day, week, or month passes. Perfect for travellers and digital nomads."
+          content="Discover flexible gym access for travel with day, week and month passes through Kyro. Built for travellers and digital nomads."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://kyroapp.co/" />
@@ -52,16 +81,21 @@ const Index = () => {
         <meta property="og:site_name" content="Kyro" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@KyroApp" />
+        <meta name="twitter:site" content="@KyroAppOfficial" />
         <meta
           name="twitter:title"
           content="Kyro - Train Anywhere | Gym Passes for Travellers"
         />
         <meta
           name="twitter:description"
-          content="Access gyms worldwide with flexible day, week, or month passes. Perfect for travellers and digital nomads."
+          content="Discover flexible gym access for travel with day, week and month passes through Kyro. Built for travellers and digital nomads."
         />
         <meta name="twitter:image" content="https://kyroapp.co/og-image.png" />
+
+        <script type="application/ld+json">
+          {JSON.stringify(webApplicationSchema)}
+        </script>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
       <Header />
