@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const faqs = [
+export const faqs = [
   {
     question: "How does Kyro work?",
     answer:
@@ -47,7 +47,6 @@ const FAQ = () => {
   return (
     <section id="faq" className="kyro-section bg-secondary/30">
       <div className="kyro-container">
-        {/* Header */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
           <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-wider text-accent">
             FAQ
@@ -60,7 +59,6 @@ const FAQ = () => {
           </p>
         </div>
 
-        {/* FAQ Accordion */}
         <div className="mx-auto max-w-3xl">
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqs.map((faq, index) => (
