@@ -68,9 +68,12 @@ for (const route of routes) {
     continue;
   }
 
-  const outputDir = path.join(distDir, route.replace(/^\/+/, ""));
-  await fs.mkdir(outputDir, { recursive: true });
-  await fs.writeFile(path.join(outputDir, "index.html"), page, "utf8");
+  // Write route.html rather than route/index.html. Netlify's Pretty URLs then
+  // serves the canonical /route path directly instead of redirecting visitors
+  // to /route/, keeping BrowserRouter and the SEO enhancement route matching in
+  // sync while preserving fully prerendered HTML for crawlers.
+  const routeName = route.replace(/^\/+|\/+$/g, "");
+  await fs.writeFile(path.join(distDir, `${routeName}.html`), page, "utf8");
 }
 
 console.log(`Prerendered ${routes.length} Kyro routes.`);
