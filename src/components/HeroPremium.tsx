@@ -24,8 +24,8 @@ const Switch = ({ on = true }: { on?: boolean }) => (
   </span>
 );
 
-const Phone = ({ children, className = "", ariaLabel }: { children: ReactNode; className?: string; ariaLabel: string }) => (
-  <div className={`absolute ${className}`} style={{ transformStyle: "preserve-3d" }} aria-label={ariaLabel}>
+const Phone = ({ children, className = "" }: { children: ReactNode; className?: string }) => (
+  <div className={`absolute ${className}`} style={{ transformStyle: "preserve-3d" }}>
     <div className="absolute -inset-[9px] rounded-[3.25rem] bg-[linear-gradient(135deg,#b7bbb8_0%,#3a413d_14%,#080b09_34%,#121713_65%,#8d948f_86%,#171c19_100%)] shadow-[0_46px_75px_rgba(20,36,27,.24),0_14px_28px_rgba(20,36,27,.16),inset_0_0_0_1px_rgba(255,255,255,.35)]" style={{ transform: "translateZ(-10px)" }} />
     <div className="absolute -inset-[5px] rounded-[3.05rem] bg-[#080b09] ring-1 ring-white/20" />
     <div className="relative h-full w-full overflow-hidden rounded-[2.75rem] bg-[#f7f9fb] ring-[3px] ring-[#101512] shadow-[inset_0_0_0_1px_rgba(255,255,255,.12)]">
@@ -76,13 +76,13 @@ const DiscoverPhone = () => (
       </div>
       <div className="mt-2 flex gap-1.5">{["All","Open Now","Day Pass","Week Pass"].map((x,i)=><span key={x} className={`whitespace-nowrap rounded-full border px-2 py-1 text-[6px] font-medium ${i===0?"border-[#173426] bg-[#173426] text-white":"border-[#d7ddd9] bg-white"}`}>{x}</span>)}</div>
       <div className="mt-3 rounded-xl bg-[linear-gradient(135deg,#2d493c,#173426)] p-3 text-white shadow-[0_8px_18px_rgba(20,52,37,.18)]">
-        <div className="flex items-center justify-between"><div className="flex items-center gap-1.5"><span className="rounded-sm bg-[#c8eed2] px-1.5 py-1 text-[6px] font-bold uppercase text-[#173426]">Active Pass</span><span className="text-[6px] text-white/65">Expires in 4 hours</span></div><button className="rounded-md bg-[#c8eed2] px-2 py-1.5 text-[6px] font-semibold text-[#173426]">Show Pass ⌘</button></div>
+        <div className="flex items-center justify-between"><div className="flex items-center gap-1.5"><span className="rounded-sm bg-[#c8eed2] px-1.5 py-1 text-[6px] font-bold uppercase text-[#173426]">Active Pass</span><span className="text-[6px] text-white/65">Expires in 4 hours</span></div><span className="rounded-md bg-[#c8eed2] px-2 py-1.5 text-[6px] font-semibold text-[#173426]">Show Pass ⌘</span></div>
         <p className="mt-2 font-display text-[11px] font-semibold">Riverside Athletic Club</p><p className="mt-1 text-[6.5px] text-white/70">Includes Full Club & Spa Access</p>
       </div>
       <div className="mb-2 mt-4 flex items-end justify-between"><p className="font-display text-[13px] font-semibold">Top Gyms Nearby</p><span className="text-[6.5px] font-medium text-[#3e694d]">See All (24)</span></div>
       <div className="overflow-hidden rounded-xl border border-[#dce1de] bg-white shadow-[0_3px_10px_rgba(20,36,27,.05)]">
-        <div className="relative h-[110px] overflow-hidden"><img src={heroGym} alt="Illustrative gym interior" className="h-full w-full object-cover" /><span className="absolute left-2 top-2 rounded bg-[#20372c]/90 px-2 py-1 text-[6px] text-white">★ 4.8 (124)</span><span className="absolute bottom-2 left-2 rounded bg-[#20372c]/90 px-2 py-1 text-[6px] text-white">0.8 miles away · London</span><button className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-lg bg-white/95"><Heart className="h-3.5 w-3.5" /></button></div>
-        <div className="p-2.5"><div className="flex justify-between gap-2"><p className="font-display text-[10px] font-semibold">Riverside Athletic Club</p><p className="text-[9px] font-bold">£20 <span className="font-normal text-[#6f7f76]">/ day</span></p></div><p className="mt-1 text-[6.5px] text-[#6b7b72]">Premium gym with extensive facilities.</p><div className="mt-2 flex gap-1">{["Pool","Sauna","CrossFit","Cafe"].map(x=><span key={x} className="rounded bg-[#edf4ef] px-1.5 py-1 text-[6px] text-[#47634f]">{x}</span>)}</div><div className="mt-2.5 grid grid-cols-2 gap-1.5"><button className="rounded-md border border-[#cfd7d2] py-1.5 text-[6.5px] font-semibold">View Passes</button><button className="rounded-md bg-[#173426] py-1.5 text-[6.5px] font-semibold text-white">Buy Now</button></div></div>
+        <div className="relative h-[110px] overflow-hidden"><img src={heroGym} alt="" className="h-full w-full object-cover" /><span className="absolute left-2 top-2 rounded bg-[#20372c]/90 px-2 py-1 text-[6px] text-white">★ 4.8 (124)</span><span className="absolute bottom-2 left-2 rounded bg-[#20372c]/90 px-2 py-1 text-[6px] text-white">0.8 miles away · London</span><span className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-lg bg-white/95"><Heart className="h-3.5 w-3.5" /></span></div>
+        <div className="p-2.5"><div className="flex justify-between gap-2"><p className="font-display text-[10px] font-semibold">Riverside Athletic Club</p><p className="text-[9px] font-bold">£20 <span className="font-normal text-[#6f7f76]">/ day</span></p></div><p className="mt-1 text-[6.5px] text-[#6b7b72]">Premium gym with extensive facilities.</p><div className="mt-2 flex gap-1">{["Pool","Sauna","CrossFit","Cafe"].map(x=><span key={x} className="rounded bg-[#edf4ef] px-1.5 py-1 text-[6px] text-[#47634f]">{x}</span>)}</div><div className="mt-2.5 grid grid-cols-2 gap-1.5"><span className="flex items-center justify-center rounded-md border border-[#cfd7d2] py-1.5 text-[6.5px] font-semibold">View Passes</span><span className="flex items-center justify-center rounded-md bg-[#173426] py-1.5 text-[6.5px] font-semibold text-white">Buy Now</span></div></div>
       </div>
     </div>
     <BottomNav />
@@ -106,8 +106,8 @@ const FilterPhone = () => (
 
 const DetailPhone = () => (
   <div className="flex h-full flex-col bg-[#f7f9fb] pt-8 text-[#17211b]">
-    <div className="relative h-[205px] overflow-hidden"><img src={heroGym} alt="Illustrative gym interior" className="h-full w-full object-cover"/><button className="absolute left-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#173426]/85 text-white">‹</button><button className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-lg bg-white/95"><Heart className="h-4 w-4"/></button><span className="absolute bottom-3 left-3 rounded bg-[#173426]/90 px-2 py-1 text-[7px] text-white">0.8 mi · London</span></div>
-    <div className="flex-1 bg-white p-3"><div className="flex justify-between gap-2"><h3 className="font-display text-[13px] font-semibold">Riverside Athletic Club</h3><p className="text-[10px] font-bold">£20 <span className="font-normal text-[#6d7b73]">/ day</span></p></div><p className="mt-2 text-[7px] leading-relaxed text-[#6d7b73]">Premium gym with extensive facilities.</p><div className="mt-3 flex gap-1.5">{["Pool","Sauna","CrossFit","Cafe"].map(x=><span key={x} className="rounded bg-[#edf4ef] px-2 py-1 text-[6px] text-[#47634f]">{x}</span>)}</div><button className="mt-4 w-full rounded-lg bg-[#173426] py-3 text-[8px] font-semibold text-white">Book Pass &nbsp; →</button><div className="mt-4 border-t border-[#e2e6e3] pt-3"><p className="text-[8px] font-semibold">About</p><p className="mt-2 text-[7px] leading-relaxed text-[#6d7b73]">A modern training facility with world-class equipment, recovery amenities and a welcoming community.</p><div className="mt-3 space-y-2 text-[7px] text-[#52645a]"><p>◷ &nbsp; Open 6am - 10pm</p><p>⌖ &nbsp; 2.1 miles from your location</p><p>◫ &nbsp; Show on map</p></div></div></div>
+    <div className="relative h-[205px] overflow-hidden"><img src={heroGym} alt="" className="h-full w-full object-cover"/><span className="absolute left-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-[#173426]/85 text-white">‹</span><span className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-lg bg-white/95"><Heart className="h-4 w-4"/></span><span className="absolute bottom-3 left-3 rounded bg-[#173426]/90 px-2 py-1 text-[7px] text-white">0.8 mi · London</span></div>
+    <div className="flex-1 bg-white p-3"><div className="flex justify-between gap-2"><h3 className="font-display text-[13px] font-semibold">Riverside Athletic Club</h3><p className="text-[10px] font-bold">£20 <span className="font-normal text-[#6d7b73]">/ day</span></p></div><p className="mt-2 text-[7px] leading-relaxed text-[#6d7b73]">Premium gym with extensive facilities.</p><div className="mt-3 flex gap-1.5">{["Pool","Sauna","CrossFit","Cafe"].map(x=><span key={x} className="rounded bg-[#edf4ef] px-2 py-1 text-[6px] text-[#47634f]">{x}</span>)}</div><span className="mt-4 flex w-full items-center justify-center rounded-lg bg-[#173426] py-3 text-[8px] font-semibold text-white">Book Pass &nbsp; →</span><div className="mt-4 border-t border-[#e2e6e3] pt-3"><p className="text-[8px] font-semibold">About</p><p className="mt-2 text-[7px] leading-relaxed text-[#6d7b73]">A modern training facility with world-class equipment, recovery amenities and a welcoming community.</p><div className="mt-3 space-y-2 text-[7px] text-[#52645a]"><p>◷ &nbsp; Open 6am - 10pm</p><p>⌖ &nbsp; 2.1 miles from your location</p><p>◫ &nbsp; Show on map</p></div></div></div>
   </div>
 );
 
@@ -123,15 +123,15 @@ const HeroPremium = () => (
           <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-[14px] text-[#667b71]">{["Global launch","Founding member perks","No spam"].map(x=><span key={x} className="flex items-center gap-2"><span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#66b67d] text-[#3d9f5c]"><Check className="h-3.5 w-3.5" strokeWidth={2}/></span>{x}</span>)}</div>
         </div>
 
-        <div className="relative hidden h-[620px] min-w-0 lg:block" style={{ perspective: "1500px" }}>
+        <div aria-hidden="true" className="pointer-events-none relative hidden h-[620px] min-w-0 select-none lg:block" style={{ perspective: "1500px" }}>
           <div className="absolute inset-x-[4%] bottom-[8px] h-[82px] rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(20,36,27,.20),rgba(20,36,27,.08)_42%,transparent_72%)] blur-xl" />
-          <Phone className="left-[1%] top-[95px] z-10 h-[520px] w-[270px] [transform:rotateY(9deg)_rotateZ(-1.8deg)]" ariaLabel="Kyro discover screen"><DiscoverPhone /></Phone>
-          <Phone className="left-1/2 top-[34px] z-30 h-[590px] w-[300px] -translate-x-1/2" ariaLabel="Kyro filter screen"><FilterPhone /></Phone>
-          <Phone className="right-[1%] top-[92px] z-20 h-[520px] w-[270px] [transform:rotateY(-9deg)_rotateZ(1.8deg)]" ariaLabel="Kyro gym detail screen"><DetailPhone /></Phone>
+          <Phone className="left-[1%] top-[95px] z-10 h-[520px] w-[270px] [transform:rotateY(9deg)_rotateZ(-1.8deg)]"><DiscoverPhone /></Phone>
+          <Phone className="left-1/2 top-[34px] z-30 h-[590px] w-[300px] -translate-x-1/2"><FilterPhone /></Phone>
+          <Phone className="right-[1%] top-[92px] z-20 h-[520px] w-[270px] [transform:rotateY(-9deg)_rotateZ(1.8deg)]"><DetailPhone /></Phone>
         </div>
 
-        <div className="mx-auto block w-full max-w-[360px] lg:hidden">
-          <div className="relative mx-auto h-[540px] w-[276px]"><Phone className="inset-0 h-full w-full" ariaLabel="Kyro mobile app preview"><DiscoverPhone /></Phone></div>
+        <div aria-hidden="true" className="pointer-events-none mx-auto block w-full max-w-[360px] select-none lg:hidden">
+          <div className="relative mx-auto h-[540px] w-[276px]"><Phone className="inset-0 h-full w-full"><DiscoverPhone /></Phone></div>
         </div>
       </div>
 
