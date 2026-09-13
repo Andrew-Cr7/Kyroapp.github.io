@@ -161,6 +161,148 @@
   .kyro-glow:hover::after {
     @apply opacity-100;
   }
+
+  .seo-refined .kyro-section {
+    padding-top: 4.75rem;
+    padding-bottom: 4.75rem;
+  }
+
+  .seo-hero {
+    min-height: 0 !important;
+    padding-top: 8.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .seo-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.8fr);
+    align-items: center;
+    gap: 3rem;
+    padding-top: 0 !important;
+  }
+
+  .seo-hero-grid > div:first-child {
+    max-width: 720px;
+  }
+
+  .seo-hero-visual-mount {
+    min-width: 0;
+  }
+
+  .seo-intro {
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .seo-related-card {
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 12px 34px rgba(20, 36, 27, 0.08) !important;
+  }
+
+  .seo-refined .max-w-4xl > h2,
+  .seo-refined .max-w-3xl > h2 {
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+
+  .seo-refined .max-w-4xl > .space-y-5,
+  .seo-refined .max-w-3xl > .space-y-5 {
+    max-width: 72ch;
+  }
+
+  .seo-refined .text-lg {
+    line-height: 1.75;
+  }
+
+  .seo-refined .rounded-2xl.bg-card {
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 8px 28px rgba(20, 36, 27, 0.06);
+  }
+
+  .seo-faq-section .border-b {
+    margin-bottom: 0.75rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: 1rem;
+    background: hsl(var(--card));
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 5px 18px rgba(20, 36, 27, 0.045);
+  }
+
+  .seo-faq-section .border-b:last-child {
+    margin-bottom: 0;
+  }
+
+  .seo-bridge-cta {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .seo-bridge-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.10), transparent 36%), radial-gradient(circle at 85% 75%, rgba(255,255,255,0.07), transparent 32%);
+  }
+
+  .seo-final-waitlist {
+    border-top: 1px solid hsl(var(--border));
+  }
+
+  .seo-contextual-signup {
+    scroll-margin-top: 7rem;
+  }
+
+  .seo-signup-portal + section,
+  .seo-signup-portal + div {
+    scroll-margin-top: 7rem;
+  }
+
+  @media (min-width: 1024px) {
+    .seo-related-card {
+      position: sticky;
+      top: 7rem;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .seo-hero {
+      padding-top: 7.5rem;
+      padding-bottom: 4.25rem;
+    }
+
+    .seo-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .seo-hero-visual-mount {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .seo-refined .kyro-section {
+      padding-top: 3.75rem;
+      padding-bottom: 3.75rem;
+    }
+
+    .seo-hero {
+      padding-top: 7rem;
+      padding-bottom: 3.25rem;
+    }
+
+    .seo-hero-visual-mount {
+      transform: scale(0.86);
+      transform-origin: top center;
+      margin-bottom: -3rem;
+    }
+
+    .seo-contextual-signup {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+  }
 }
 
 @layer utilities {
