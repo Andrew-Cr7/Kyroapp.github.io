@@ -1,40 +1,11 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import SeoConversionEnhancer from "@/components/SeoConversionEnhancer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import LondonGymDayPasses from "./pages/LondonGymDayPasses";
-import ForGyms from "./pages/ForGymsV2";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import {
-  CanTouristsUseGymsInLondon,
-  GymDayPassesUk,
-  HowToFindAGymWhileTravelling,
-} from "./pages/SeoContentPages";
-import {
-  AirportLayoverGymAccess,
-  BusinessTravelGymAccess,
-  FitnessWhileTravellingGuide,
-  GymAccessForDigitalNomads,
-  VisitorGymAccess,
-} from "./pages/SeoBatchPages";
-import {
-  CanUseGymWithoutMembership,
-  FindingAGymInANewCity,
-  FlexibleGymPassesForTravellers,
-  GymDayPassesExplained,
-  HowToFindGymsWithDayPasses,
-} from "./pages/SeoEvergreenPages";
-import {
-  HowToStayFitWhileTravelling,
-  ShortTermGymMembershipAlternatives,
-  TouristGymPass,
-} from "./pages/SeoNextPages";
+import AppRoutes from "./AppRoutes";
 
 const queryClient = new QueryClient();
 
@@ -45,75 +16,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <SeoConversionEnhancer />
-          <Routes>
-            <Route path="/" element={<Index />} />
-
-            <Route
-              path="/london-gym-day-passes"
-              element={<LondonGymDayPasses />}
-            />
-            <Route path="/gym-day-passes-uk" element={<GymDayPassesUk />} />
-            <Route
-              path="/how-to-find-a-gym-while-travelling"
-              element={<HowToFindAGymWhileTravelling />}
-            />
-            <Route
-              path="/can-tourists-use-gyms-in-london"
-              element={<CanTouristsUseGymsInLondon />}
-            />
-            <Route
-              path="/fitness-while-travelling-guide"
-              element={<FitnessWhileTravellingGuide />}
-            />
-            <Route
-              path="/gym-access-for-digital-nomads"
-              element={<GymAccessForDigitalNomads />}
-            />
-            <Route
-              path="/business-travel-gym-access"
-              element={<BusinessTravelGymAccess />}
-            />
-            <Route path="/visitor-gym-access" element={<VisitorGymAccess />} />
-            <Route
-              path="/airport-layover-gym-access"
-              element={<AirportLayoverGymAccess />}
-            />
-            <Route
-              path="/can-you-use-a-gym-without-a-membership"
-              element={<CanUseGymWithoutMembership />}
-            />
-            <Route
-              path="/gym-day-passes-explained"
-              element={<GymDayPassesExplained />}
-            />
-            <Route
-              path="/how-to-find-gyms-with-day-passes"
-              element={<HowToFindGymsWithDayPasses />}
-            />
-            <Route
-              path="/flexible-gym-passes-for-travellers"
-              element={<FlexibleGymPassesForTravellers />}
-            />
-            <Route
-              path="/finding-a-gym-in-a-new-city"
-              element={<FindingAGymInANewCity />}
-            />
-            <Route
-              path="/short-term-gym-membership-alternatives"
-              element={<ShortTermGymMembershipAlternatives />}
-            />
-            <Route path="/tourist-gym-pass" element={<TouristGymPass />} />
-            <Route
-              path="/how-to-stay-fit-while-travelling"
-              element={<HowToStayFitWhileTravelling />}
-            />
-
-            <Route path="/for-gyms" element={<ForGyms />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AppRoutes />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
