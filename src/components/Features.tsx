@@ -21,7 +21,7 @@ const Features = () => {
     {
       icon: <MapPin className="h-7 w-7" />,
       title: "Gyms Worldwide",
-      description: "Access thousands of gyms across the globe. From Tokyo to Buenos Aires, your fitness journey never stops.",
+      description: "Discover gyms across cities and travel destinations as Kyro's partner network grows.",
     },
     {
       icon: <Clock className="h-7 w-7" />,
@@ -31,12 +31,12 @@ const Features = () => {
     {
       icon: <CreditCard className="h-7 w-7" />,
       title: "Simple Pricing",
-      description: "Transparent pricing with no hidden fees. Pay only for what you use, when you need it.",
+      description: "Transparent pricing with no hidden fees. Pay only for the access you need, when you need it.",
     },
     {
       icon: <Globe className="h-7 w-7" />,
-      title: "Book Anywhere",
-      description: "Browse, book and access gyms instantly from your phone. No phone calls or paperwork needed.",
+      title: "One Simple Flow",
+      description: "Browse gyms, compare facilities and buy flexible access from your phone without phone calls or paperwork.",
     },
   ];
 
@@ -51,7 +51,7 @@ const Features = () => {
             Fitness without borders
           </h2>
           <p className="text-lg text-muted-foreground">
-            We're breaking down the barriers that keep travellers from staying fit. 
+            We're breaking down the barriers that keep travellers from staying fit.
             No more searching for gyms, negotiating prices, or signing long contracts.
           </p>
         </div>
